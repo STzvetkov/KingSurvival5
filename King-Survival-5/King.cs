@@ -7,6 +7,11 @@ namespace KingSurvivalGame
 {
     class KingSurvivalGame : BaseGame
     {
+        /// <summary>
+        /// Comment - nzhul
+        /// </summary>
+        /// <param name="positionCoodinates"></param>
+        /// <returns></returns>
         static bool check(int[] positionCoodinates)
         {
             int a = positionCoodinates[0];
@@ -18,7 +23,7 @@ namespace KingSurvivalGame
 
         static void PokajiDyskata()
         {
-            //tova printira prazen red na konzolata
+            //tova printira prazen red na konzolata !
             Console.WriteLine();
             //tuka kato cqlo si pravq nekvi shareniiki
             for (int row = 0; row < field.GetLength(0); row++)
