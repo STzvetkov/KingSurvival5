@@ -1,7 +1,7 @@
 ﻿using System;
 using King;
 
-// bachka, ne butaj!
+// bachka, ne butaj! n //TODO: remove comment
 
 namespace KingSurvivalGame
 {
