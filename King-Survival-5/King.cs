@@ -8,15 +8,15 @@ namespace KingSurvivalGame
     class KingSurvivalGame : BaseGame
     {
         /// <summary>
-        /// Comment - nzhul
+        /// Comment
         /// </summary>
-        /// <param name="positionCoodinates"></param>
+        /// <param name="posCoordinatesDido"></param>
         /// <returns></returns>
-        static bool check(int[] positionCoodinates)
+        static bool check(int[] posCoordinatesDido)
         {
-            int a = positionCoodinates[0];
+            int a = posCoordinatesDido[0];
             bool flag = (a >= ygliNaDyskata[0, 0]) && (a <= ygliNaDyskata[3, 0]);
-            int b = positionCoodinates[1];
+            int b = posCoordinatesDido[1];
             bool flag2 = (b >= ygliNaDyskata[0, 1]) && (b <= ygliNaDyskata[3, 1]);
             return flag && flag2;
         }
