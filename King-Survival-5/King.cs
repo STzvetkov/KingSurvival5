@@ -2,6 +2,7 @@
 using King;
 
 // bachka, ne butaj! n //TODO: remove comment or refacture it
+//TEST
 
 namespace KingSurvivalGame
 {
