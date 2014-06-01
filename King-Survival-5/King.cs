@@ -17,8 +17,8 @@ namespace KingSurvivalGame
             int a = positionCoodinates[0];
             bool flag = (a >= ygliNaDyskata[0, 0]) && (a <= ygliNaDyskata[3, 0]);
             int b = positionCoodinates[1];
-            bool flag2 = (b >= ygliNaDyskata[0, 1]) && (b <= ygliNaDyskata[3, 1]);
-            return flag && flag2;
+            bool flag22 = (b >= ygliNaDyskata[0, 1]) && (b <= ygliNaDyskata[3, 1]);
+            return flag && flag22;
         }
 
         static void PokajiDyskata()
