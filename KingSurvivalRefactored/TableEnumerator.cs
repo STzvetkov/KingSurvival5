@@ -31,20 +31,15 @@ namespace KingSurvivalRefactored
         }
         public bool MoveNext()
         {
-            if (this.currentX < iterationTarget.Cells.GetLength(0))
-            {
-                this.currentX++;
-            }
-            else
+            this.currentX++;
+            if (this.currentX == iterationTarget.Cells.GetLength(0))
             {
                 this.currentX = 0;
-                if (this.currentY < iterationTarget.Cells.GetLength(1))
-                {
-                    this.currentY++;
-                }
-                else
+                this.currentY++;
+                if (this.currentY == iterationTarget.Cells.GetLength(1))
                 {
                     return false;
+                    
                 }
             }
             this.lastCell = this.iterationTarget.Cells[this.currentX, this.currentY];
@@ -53,7 +48,7 @@ namespace KingSurvivalRefactored
 
         public void Reset()
         {
-            this.currentX = 0;
+            this.currentX = -1;
             this.currentY = 0;
             this.lastCell = this.iterationTarget.Cells[0, 0];
         }

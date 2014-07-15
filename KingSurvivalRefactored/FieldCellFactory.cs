@@ -26,20 +26,17 @@ namespace KingSurvivalRefactored
             ConsoleColor currentCellColor = currentCellIsOdd?oddColor:evenColor;
             FieldCell result = new FieldCell(currentCol, currentRow, representationChar,
                 currentCellColor);
-             
-            if (currentCol>=ColCount)
+            currentCol++;
+            if (currentCol == ColCount)
             {
                 currentCol = 0;
                 currentRow++;
-                if (currentRow>=RowCount)
+                if (currentRow > RowCount)
                 {
                     throw new InvalidOperationException("All cells were generated.");
                 }
             }
-            else
-            {
-                currentCol++;
-            }
+           
             currentCellIsOdd = !currentCellIsOdd;
 
             return result;

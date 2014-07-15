@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
@@ -37,8 +38,19 @@ namespace KingSurvivalRefactored
         /// <returns>String with the drawing representation of the frame</returns>
         private string ReadImage(string path) 
         {
-            // Read the frame image from .txt file
-            throw new NotImplementedException();
+            StringBuilder result = new StringBuilder();
+            //may be handling the exception when the file is not present
+            //however at this point we don't have the means to adequately manage that situation better than the framework 
+            using (StreamReader imageReader = new StreamReader(path))
+            {
+                string readLineBuffer = imageReader.ReadLine();
+                while (readLineBuffer != null)
+                {
+                    result.Append(readLineBuffer + "\n");
+                    readLineBuffer = imageReader.ReadLine();
+                }
+            }
+            return result.ToString();
         }
 
     }
