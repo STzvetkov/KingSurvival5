@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
 {
-    public class Table : IEnumerable,IEnumerator // Iterator pattern - foreach on Table instance iterates over the table cells
+    public class Table : IEnumerable // Iterator pattern - foreach on Table instance iterates over the table cells
     {
         private FieldCell[,] cells;
         private Frame frame;
@@ -49,19 +49,5 @@ namespace KingSurvivalRefactored
             throw new NotImplementedException();
         }
 
-        public object Current
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public bool MoveNext()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
