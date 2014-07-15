@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
 {
+    /// <summary>
+    /// Represents the frame around the playing field of the table - the directions and row and column numbers
+    /// </summary>
     public class Frame
     {
 
@@ -27,6 +30,11 @@ namespace KingSurvivalRefactored
             }
         }
 
+        /// <summary>
+        /// Uses StreamReader to read the image of the frame from a text file and save it to a string
+        /// </summary>
+        /// <param name="path">The path to the text file containing only the image of the frame</param>
+        /// <returns>String with the drawing representation of the frame</returns>
         private string ReadImage(string path) 
         {
             // Read the frame image from .txt file

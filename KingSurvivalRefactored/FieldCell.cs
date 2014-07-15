@@ -5,6 +5,9 @@ using System.Text;
 
 namespace KingSurvivalRefactored
 {
+    /// <summary>
+    /// Represents a cell from the playing field of the table
+    /// </summary>
     public class FieldCell
     {
         private int coordinateX;
@@ -54,6 +57,9 @@ namespace KingSurvivalRefactored
             }
         }
 
+        /// <summary>
+        /// The character that the cell contains
+        /// </summary>
         public char Value
         {
             get
