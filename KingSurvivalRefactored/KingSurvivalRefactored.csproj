@@ -44,8 +44,10 @@
     <Compile Include="Checker.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="FieldCell.cs" />
+    <Compile Include="FieldCellFactory.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="IFieldCellFactory.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Pawn.cs" />
     <Compile Include="Program.cs" />

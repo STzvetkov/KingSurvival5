@@ -12,9 +12,9 @@ namespace KingSurvivalRefactored
         private FieldCell[,] cells;
         private Frame frame;
 
-        public Table(FieldCell[,] cells, Frame frame)
+        public Table(IFieldCellFactory cellCreator, Frame frame)
         {
-            this.Cells = cells;
+            InitializeCells(cellCreator);
             this.TableFrame = frame;
         }
 
@@ -69,6 +69,21 @@ namespace KingSurvivalRefactored
             return new TableEnumerator(this);
         }
 
-
+        private void InitializeCells(IFieldCellFactory cellCreator)
+        {
+            if (cellCreator==null)
+            {
+                throw new ArgumentNullException("Class table cant correctly initialize with a null reference for a cellCreator");
+            }
+            FieldCell[,] cells = new FieldCell[cellCreator.RowCount, cellCreator.ColCount];
+            for (int i = 0; i < cellCreator.RowCount; i++)
+            {
+                for (int j = 0; j < cellCreator.ColCount; j++)
+                {
+                    cells[i, j] = cellCreator.GenerateNextCell();
+                }
+            }
+            this.Cells=cells;
+        }
     }
 }
