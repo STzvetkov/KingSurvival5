@@ -22,32 +22,53 @@ namespace KingSurvivalRefactored
         {
             get
             {
-                throw new NotImplementedException();
+                return cells;
             }
 
             private set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("The array of FieldCell-s given to the table is null. This is unacceptable behaviour");
+                }
+                for (int i = 0; i < value.GetLength(0); i++)
+                {
+                    for (int j = 0; j < value.GetLength(1); j++)
+                    {
+                        if (value[i,j] == null)
+                        {
+                            throw new ArgumentNullException("One of the FieldCells in the given array is null");
+                        }
+                    }
+                }
+                this.cells = value;
             }
+			
+                
         }
 
         public Frame TableFrame
         {
             get
             {
-                throw new NotImplementedException();
+                return frame;
             }
 
             private set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("The Frame given to the table is null.");
+                }
+                this.frame = value;
             }
         }
 
         public IEnumerator GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new TableEnumerator(this);
         }
+
 
     }
 }
