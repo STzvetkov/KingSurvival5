@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
 {
-    class FieldCellFactory:IFieldCellFactory
+    public class FieldCellFactory:IFieldCellFactory
     {
 
         public FieldCellFactory(int rowCount, int colCount, char representationChar, ConsoleColor evenColor, ConsoleColor oddColor)
