@@ -32,7 +32,22 @@ namespace KingSurvivalRefactored
         public bool IsValidMove(Figure figureToCheck, string input)
         {
             // Check if the figure given can move in the direction from the input 
-            throw new NotImplementedException();
+            input = input.Trim();
+            int len = input.Length;
+            string lastTwoLetters = input[len - 2].ToString() + input[len - 1];
+
+            string[] allowedMoves = figureToCheck.AllowedMoves;
+
+            for (int i = 0; i < allowedMoves.Length; i++)
+            {
+                if (allowedMoves[i] == lastTwoLetters)
+                {
+                    // The figure can perform a move in this direction.
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -44,7 +59,18 @@ namespace KingSurvivalRefactored
         /// <returns>True if such cell exists and it is free. False in any other case</returns>
         public bool IsCellAvailable(FieldCell cell, Table table)
         {
-            throw new NotImplementedException();
+            int tableRows = table.Cells.GetLength(0);
+            int tableCols = table.Cells.GetLength(1);
+
+            if (cell.CoordinateX > 0 && cell.CoordinateX < tableRows && cell.CoordinateY > 0 && cell.CoordinateY < tableCols)
+            {
+                if (cell.IsFree)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -55,7 +81,12 @@ namespace KingSurvivalRefactored
         public bool HasKingWon(King king)
         {
             // Check if king reached the top of the board
-            throw new NotImplementedException();
+            if (king.ContainingCell.CoordinateY == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -70,7 +101,26 @@ namespace KingSurvivalRefactored
         public bool HasKingLost(King king, Table table)
         {
             // Check if king has any valid moves left
-            throw new NotImplementedException();
+            FieldCell currKingCell = king.ContainingCell;
+
+            FieldCell upLeftCell = table.Cells[currKingCell.CoordinateX - 1, currKingCell.CoordinateY - 1];
+            bool isUpperLeftCellFree = IsCellAvailable(upLeftCell, table);
+
+            FieldCell upRightCell = table.Cells[currKingCell.CoordinateX + 1, currKingCell.CoordinateY - 1];
+            bool isUpperRightCellFree = IsCellAvailable(upRightCell, table);
+
+            FieldCell downLeftCell = table.Cells[currKingCell.CoordinateX- 1, currKingCell.CoordinateY + 1];
+            bool isDownLeftCellCellFree = IsCellAvailable(downLeftCell, table);
+
+            FieldCell downRightCell = table.Cells[currKingCell.CoordinateX + 1, currKingCell.CoordinateY + 1];
+            bool isDownRightCellCellFree = IsCellAvailable(downRightCell, table);
+
+            if (isUpperLeftCellFree || isUpperRightCellFree || isDownLeftCellCellFree || isDownRightCellCellFree)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>

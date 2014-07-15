@@ -57,9 +57,6 @@ namespace KingSurvivalRefactored
             }
         }
 
-        /// <summary>
-        /// The character that the cell contains
-        /// </summary>
         public char Value
         {
             get
@@ -69,6 +66,17 @@ namespace KingSurvivalRefactored
             set
             {
                 this.value = value;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the cell is empty
+        /// </summary>
+        public bool IsFree
+        {
+            get
+            {
+                return this.Value == ' ';
             }
         }
 
