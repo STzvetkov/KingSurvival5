@@ -52,7 +52,7 @@ namespace KingSurvivalRefactored
             Console.Write(EmptyCell);
             Console.SetCursorPosition(newCell.CoordinateX, newCell.CoordinateY);
             Console.BackgroundColor = newCell.Color;
-            Console.Write(newCell.Value);
+            Console.Write(figureToMove.DrawingRepresentation);
         }
     }
 }
