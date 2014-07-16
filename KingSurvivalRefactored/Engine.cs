@@ -12,7 +12,11 @@ namespace KingSurvivalRefactored
         private Table table;
         private Figure[] figures;
         private Figure currentFigure;
-
+        private const string FRAME_SORCE_FILE = "test";
+        private const byte BORD_SIZE = 8;
+        private const char FIELD_RPRESENTATION = '\u2588';
+        private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
+        private const ConsoleColor SECOND_FIELD_COLOR = ConsoleColor.Blue;
         public Engine()
         {
             this.moveCounter = 0;
@@ -112,8 +116,9 @@ namespace KingSurvivalRefactored
         /// <returns>The table created</returns>
         private Table CreateTable()
         {
-            // Create the frame and the cells
-            throw new NotImplementedException();
+            FieldCellFactory cellCreator = new FieldCellFactory(BORD_SIZE, BORD_SIZE,
+                FIELD_RPRESENTATION, FIRST_FIELD_COLOR, SECOND_FIELD_COLOR);
+            return new Table(cellCreator, new Frame(FRAME_SORCE_FILE));
         }
 
         /// <summary>
