@@ -33,7 +33,9 @@ namespace KingSurvivalRefactored
         /// <param name="cellToDraw">The cell to be drawn</param>
         private static void DrawCell(FieldCell cellToDraw)
         {
-            Console.SetCursorPosition(cellToDraw.CoordinateX, cellToDraw.CoordinateY);
+            int DrawContentX = Table.BaseX + cellToDraw.CoordinateX*FieldCell.Width;
+            int DrawContentY = Table.BaseY + cellToDraw.CoordinateY*FieldCell.Height;
+            Console.SetCursorPosition(DrawContentX, DrawContentY);
             Console.BackgroundColor = cellToDraw.Color;
             Console.Write(cellToDraw.Value);
             Console.ResetColor();
