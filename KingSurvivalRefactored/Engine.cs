@@ -14,6 +14,7 @@ namespace KingSurvivalRefactored
         private const char FIELD_RPRESENTATION = '\u2588';
         private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
         private const ConsoleColor SECOND_FIELD_COLOR = ConsoleColor.Blue;
+
         public Engine()
         {
             this.moveCounter = 0;
@@ -28,10 +29,7 @@ namespace KingSurvivalRefactored
             while (true)
             {
                 string input;
-
-                //**********************************************
-
-                // suggested check implementation
+                FieldCell requestedCell = null;
 
                 bool isValidInput;
                 do
@@ -44,7 +42,7 @@ namespace KingSurvivalRefactored
                         Console.WriteLine("Invalid Figure (the first letter).");
                     }
                     else
-                    {                        
+                    {
                         currentFigure = ExtractRequestedFigure(input, this.figures);
                         isValidInput = Checker.Instance.IsValidMove(currentFigure, input);
                         if (!isValidInput)
@@ -54,7 +52,7 @@ namespace KingSurvivalRefactored
                         }
                         else
                         {
-                            FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
+                            requestedCell = ExtractRequestedPosition(input, currentFigure);
                             isValidInput = Checker.Instance.IsCellAvailable(requestedCell, this.table);
                             if (!isValidInput)
                             {
@@ -64,30 +62,6 @@ namespace KingSurvivalRefactored
                         }
                     }
                 } while (!isValidInput);
-
-
-               /* if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
-                {
-                    // Invalid Figure(first letter). Ask the user for new input
-                    Console.WriteLine("Invalid Figure (the first letter).");
-                    input = ReadMoveInput();
-                }
-
-                currentFigure = ExtractRequestedFigure(input, this.figures);
-                if (!(Checker.Instance.IsValidMove(currentFigure, input)))
-                {
-                    // Invalid Move. Ask the user for new input
-                    Console.WriteLine("Invalid move.");
-                    input = ReadMoveInput();
-                }
-
-                FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
-                if (!(Checker.Instance.IsCellAvailable(requestedCell, this.table)))
-                {
-                    // Cell not free. Ask the user for new input
-                    Console.WriteLine("This cell is not free. Please choose another one.");
-                    input = ReadMoveInput();
-                }*/
 
                 MoveFigure(currentFigure, requestedCell);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
@@ -132,9 +106,9 @@ namespace KingSurvivalRefactored
                 }
             }
 
-            if (requested==null)
+            if (requested == null)
             {
-                throw new ArgumentNullException("requested","Invalid figure requested.");
+                throw new ArgumentNullException("requested", "Invalid figure requested.");
             }
 
             return requested;
