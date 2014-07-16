@@ -29,7 +29,7 @@ namespace KingSurvivalRefactored
             {
                 string input = ReadMoveInput();
 
-                if (!(Checker.Instance.IsValidFigureRequested(moveCounter,input, this.figures)))
+                if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
                 }
@@ -82,7 +82,7 @@ namespace KingSurvivalRefactored
         /// Using them as parameters creates a Table instance.
         /// </summary>
         /// <returns>The table created</returns>
-        private Table CreateTable() 
+        private Table CreateTable()
         {
             // Create the frame and the cells
             throw new NotImplementedException();
@@ -103,10 +103,24 @@ namespace KingSurvivalRefactored
         /// Asks the user to enter his next move, saves it to a string variable and returns it.
         /// </summary>
         /// <returns>The user move input</returns>
-        private string ReadMoveInput() 
+        private string ReadMoveInput()
         {
+            string input;
             // Ask the user to enter the next move, save it to a string variable and return it
-            throw new NotImplementedException();
+            if (moveCounter % 2 != 0)
+            {
+                // It's King's turn
+                Console.WriteLine("Please enter king's turn: ");
+                input = Console.ReadLine();
+            }
+            else
+            {
+                // It's pawn's turn
+                Console.WriteLine("Please enter pawn's turn: ");
+                input = Console.ReadLine();
+            }
+
+            return input.Trim();
         }
 
         /// <summary>

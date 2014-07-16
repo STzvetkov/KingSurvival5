@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
     /// <summary>
     /// A class used to perform various checks on figures and cells
     /// </summary>
-    class Checker // To be made Singleton
+    public class Checker // To be made Singleton
     {
         private const char EmptyCell = ' ';
+
         public static Checker Instance
         {
             get
@@ -19,6 +14,7 @@ namespace KingSurvivalRefactored
                 return new Checker();
             }
         }
+
         /// <summary>
         /// Extracts the last two letters from the input and searches for them the figureToCheck.AllowedMoves.
         /// Checks only if the figure is allowed by the rules to perform such move. Does not check if the new cell is available
@@ -32,7 +28,6 @@ namespace KingSurvivalRefactored
         public bool IsValidMove(Figure figureToCheck, string input)
         {
             // Check if the figure given can move in the direction from the input 
-            input = input.Trim();
             int len = input.Length;
             string lastTwoLetters = input[len - 2].ToString() + input[len - 1];
 
@@ -104,16 +99,16 @@ namespace KingSurvivalRefactored
             FieldCell currKingCell = king.ContainingCell;
 
             FieldCell upLeftCell = table.Cells[currKingCell.CoordinateX - 1, currKingCell.CoordinateY - 1];
-            bool isUpperLeftCellFree = IsCellAvailable(upLeftCell, table);
+            bool isUpperLeftCellFree = this.IsCellAvailable(upLeftCell, table);
 
             FieldCell upRightCell = table.Cells[currKingCell.CoordinateX + 1, currKingCell.CoordinateY - 1];
-            bool isUpperRightCellFree = IsCellAvailable(upRightCell, table);
+            bool isUpperRightCellFree = this.IsCellAvailable(upRightCell, table);
 
-            FieldCell downLeftCell = table.Cells[currKingCell.CoordinateX- 1, currKingCell.CoordinateY + 1];
-            bool isDownLeftCellCellFree = IsCellAvailable(downLeftCell, table);
+            FieldCell downLeftCell = table.Cells[currKingCell.CoordinateX - 1, currKingCell.CoordinateY + 1];
+            bool isDownLeftCellCellFree = this.IsCellAvailable(downLeftCell, table);
 
             FieldCell downRightCell = table.Cells[currKingCell.CoordinateX + 1, currKingCell.CoordinateY + 1];
-            bool isDownRightCellCellFree = IsCellAvailable(downRightCell, table);
+            bool isDownRightCellCellFree = this.IsCellAvailable(downRightCell, table);
 
             if (isUpperLeftCellFree || isUpperRightCellFree || isDownLeftCellCellFree || isDownRightCellCellFree)
             {
@@ -141,7 +136,28 @@ namespace KingSurvivalRefactored
         public bool IsValidFigureRequested(int counter, string input, Figure[] figures)
         {
             // Check if it is King's or Pawn's turn with the counter(odd or even) and check if the first letter of the input is correct
-            throw new NotImplementedException();
+            if (counter % 2 != 0)
+            {
+                // It's King's turn
+                if (input[0] == 'K')
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                // It's pawn's turn
+                for (int i = 0; i < figures.Length; i++)
+                {
+                    char currentFigureDrawingRepresentation = figures[i].DrawingRepresentation;
+                    if (currentFigureDrawingRepresentation == input[0])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
