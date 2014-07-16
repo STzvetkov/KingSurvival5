@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
 {
@@ -30,11 +27,46 @@ namespace KingSurvivalRefactored
 
             while (true)
             {
-                string input = ReadMoveInput();
+                string input;
 
                 //**********************************************
 
-                if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
+                // suggested check implementation
+
+                bool isValidInput;
+                do
+                {
+                    input = ReadMoveInput();
+                    isValidInput = Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures);
+                    if (!isValidInput)
+                    {
+                        // Invalid Figure(first letter). Ask the user for new input
+                        Console.WriteLine("Invalid Figure (the first letter).");
+                    }
+                    else
+                    {                        
+                        currentFigure = ExtractRequestedFigure(input, this.figures);
+                        isValidInput = Checker.Instance.IsValidMove(currentFigure, input);
+                        if (!isValidInput)
+                        {
+                            // Invalid Move. Ask the user for new input
+                            Console.WriteLine("Invalid move.");
+                        }
+                        else
+                        {
+                            FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
+                            isValidInput = Checker.Instance.IsCellAvailable(requestedCell, this.table);
+                            if (!isValidInput)
+                            {
+                                // Cell not free. Ask the user for new input
+                                Console.WriteLine("This cell is not free. Please choose another one.");
+                            }
+                        }
+                    }
+                } while (!isValidInput);
+
+
+               /* if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
                     Console.WriteLine("Invalid Figure (the first letter).");
@@ -55,7 +87,7 @@ namespace KingSurvivalRefactored
                     // Cell not free. Ask the user for new input
                     Console.WriteLine("This cell is not free. Please choose another one.");
                     input = ReadMoveInput();
-                }
+                }*/
 
                 MoveFigure(currentFigure, requestedCell);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
