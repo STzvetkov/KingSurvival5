@@ -28,6 +28,8 @@ namespace KingSurvivalRefactored
             {
                 string input = ReadMoveInput();
 
+                //**********************************************
+
                 if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
@@ -79,17 +81,24 @@ namespace KingSurvivalRefactored
         private Figure ExtractRequestedFigure(string input, Figure[] figures)
         {
             // Get the first letter of the input and find the figure with the same drawingRepresentation from the figures array
-            // TODO: check it - Ask user for new input (Tanya)
             char figureDrawingRepresentation = input[0];
 
-            Figure requested = figures[0];
+            // Figure requested = figures[0];
+            Figure requested = null;
+
 
             for (int i = 0; i < figures.Length; i++)
             {
                 if (figures[i].DrawingRepresentation == figureDrawingRepresentation)
                 {
                     requested = figures[i];
+                    break;
                 }
+            }
+
+            if (requested==null)
+            {
+                throw new ArgumentNullException("requested","Invalid figure requested.");
             }
 
             return requested;
@@ -157,27 +166,27 @@ namespace KingSurvivalRefactored
             int newCellCoordinateX = currentFigure.ContainingCell.CoordinateX;
             int newCellCoordinateY = currentFigure.ContainingCell.CoordinateY;
 
-            if (directionX=='L')
+            if (directionX == 'L')
             {
                 newCellCoordinateX++;
             }
 
-            if (directionX=='R')
+            if (directionX == 'R')
             {
                 newCellCoordinateX--;
             }
 
-            if (directionY=='U')
+            if (directionY == 'U')
             {
                 newCellCoordinateY--;
             }
 
-            if (directionY=='D')
+            if (directionY == 'D')
             {
                 newCellCoordinateY++;
             }
 
-            return new FieldCell(newCellCoordinateX,newCellCoordinateY,currentFigure.ContainingCell.Value,
+            return new FieldCell(newCellCoordinateX, newCellCoordinateY, currentFigure.ContainingCell.Value,
                                  currentFigure.ContainingCell.Color);
         }
 
