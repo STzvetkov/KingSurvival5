@@ -18,7 +18,6 @@ namespace KingSurvivalRefactored
             this.moveCounter = 0;
         }
 
-
         public void Start()
         {
             this.table = CreateTable();
@@ -32,30 +31,38 @@ namespace KingSurvivalRefactored
                 if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
+                    Console.WriteLine("Invalid Figure (the first letter).");
+                    input = ReadMoveInput();
                 }
 
                 currentFigure = ExtractRequestedFigure(input, this.figures);
                 if (!(Checker.Instance.IsValidMove(currentFigure, input)))
                 {
                     // Invalid Move. Ask the user for new input
+                    Console.WriteLine("Invalid move.");
+                    input = ReadMoveInput();
                 }
 
                 FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
                 if (!(Checker.Instance.IsCellAvailable(requestedCell, this.table)))
                 {
                     // Cell not free. Ask the user for new input
+                    Console.WriteLine("This cell is not free. Please choose another one.");
+                    input = ReadMoveInput();
                 }
 
                 MoveFigure(currentFigure, requestedCell);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
                     // king won message
+                    Console.WriteLine("King wins!");
                     break;
                 }
 
                 if (Checker.Instance.HasKingLost(this.figures[0] as King, this.table))
                 {
                     //king lost message 
+                    Console.WriteLine("King lost!");
                     break;
                 }
 
@@ -72,8 +79,20 @@ namespace KingSurvivalRefactored
         private Figure ExtractRequestedFigure(string input, Figure[] figures)
         {
             // Get the first letter of the input and find the figure with the same drawingRepresentation from the figures array
-            // Ask user for new input 
-            throw new NotImplementedException();
+            // TODO: check it - Ask user for new input (Tanya)
+            char figureDrawingRepresentation = input[0];
+
+            Figure requested = figures[0];
+
+            for (int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i].DrawingRepresentation == figureDrawingRepresentation)
+                {
+                    requested = figures[i];
+                }
+            }
+
+            return requested;
         }
 
         // TODO: To be moved to a Factory class
@@ -133,7 +152,33 @@ namespace KingSurvivalRefactored
         /// <returns>Cell with coordinates equal to the ones requested by the user</returns>
         private FieldCell ExtractRequestedPosition(string input, Figure currentFigure)
         {
-            throw new NotImplementedException();
+            char directionX = input[input.Length - 1];
+            char directionY = input[input.Length - 2];
+            int newCellCoordinateX = currentFigure.ContainingCell.CoordinateX;
+            int newCellCoordinateY = currentFigure.ContainingCell.CoordinateY;
+
+            if (directionX=='L')
+            {
+                newCellCoordinateX++;
+            }
+
+            if (directionX=='R')
+            {
+                newCellCoordinateX--;
+            }
+
+            if (directionY=='U')
+            {
+                newCellCoordinateY--;
+            }
+
+            if (directionY=='D')
+            {
+                newCellCoordinateY++;
+            }
+
+            return new FieldCell(newCellCoordinateX,newCellCoordinateY,currentFigure.ContainingCell.Value,
+                                 currentFigure.ContainingCell.Color);
         }
 
         /// <summary>
