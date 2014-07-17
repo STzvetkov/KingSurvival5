@@ -9,7 +9,7 @@ namespace KingSurvivalRefactored
         private Table table;
         private Figure[] figures;
         private Figure currentFigure;
-        private const string FRAME_SORCE_FILE = "test";
+        private const string FRAME_SORCE_FILE = "test.txt";
         private const byte BORD_SIZE = 8;
         private const char FIELD_RPRESENTATION = '\u2588';
         private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
