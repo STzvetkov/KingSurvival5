@@ -151,8 +151,9 @@ namespace KingSurvivalRefactored
             FieldCell DPawnInitPosition = table.Cells[0, 6];
             Pawn DPawn = new Pawn(DPawnInitPosition, 'D');
 
-            // The table is needed to get the cells where we are going to put the figures
-            throw new NotImplementedException();
+            Figure[] allFigures = new Figure[5] { theKing, APawn, BPawn, CPawn, DPawn };
+
+            return allFigures;
         }
 
         /// <summary>
