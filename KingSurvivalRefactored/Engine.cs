@@ -9,7 +9,7 @@ namespace KingSurvivalRefactored
         private Table table;
         private Figure[] figures;
         private Figure currentFigure;
-        private const string FRAME_SORCE_FILE = "test";
+        private const string FRAME_SORCE_FILE = "test.txt";
         private const byte BORD_SIZE = 8;
         private const char FIELD_RPRESENTATION = '\u2588';
         private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
@@ -124,8 +124,26 @@ namespace KingSurvivalRefactored
         /// <returns>The figures created with cells from the table assigned to them</returns>
         private Figure[] CreateFigures(Table table)
         {
-            // The table is needed to get the cells where we are going to put the figures
-            throw new NotImplementedException();
+            var kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
+            var kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
+            FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
+            King theKing = new King(kingInitialPosition, 'K');
+
+            FieldCell APawnInitPosition = table.Cells[0, 0];
+            Pawn APawn = new Pawn(APawnInitPosition, 'A');
+
+            FieldCell BPawnInitPosition = table.Cells[0, 2];
+            Pawn BPawn = new Pawn(BPawnInitPosition, 'B');
+
+            FieldCell CPawnInitPosition = table.Cells[0, 4];
+            Pawn CPawn = new Pawn(CPawnInitPosition, 'C');
+
+            FieldCell DPawnInitPosition = table.Cells[0, 6];
+            Pawn DPawn = new Pawn(DPawnInitPosition, 'D');
+
+            Figure[] allFigures = new Figure[5] { theKing, APawn, BPawn, CPawn, DPawn };
+
+            return allFigures;
         }
 
         /// <summary>

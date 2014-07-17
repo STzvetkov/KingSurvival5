@@ -9,6 +9,7 @@ namespace KingSurvivalRefactored
     {
         private FieldCell containingCell;
         private char drawingRepresentation;
+        private char[] VALID_SYMBOLS = {'K', 'A', 'B', 'C', 'D'};
 
         public Figure(FieldCell containingCell, char drawingRepresentation)
         {
@@ -24,10 +25,11 @@ namespace KingSurvivalRefactored
         {
             get
             {
-                throw new System.NotImplementedException();
+                return this.containingCell;
             }
             set
             {
+                this.containingCell = value;
             }
         }
 
@@ -38,10 +40,18 @@ namespace KingSurvivalRefactored
         {
             get
             {
-                throw new System.NotImplementedException();
+                return this.drawingRepresentation;
             }
             set
             {
+                if (VALID_SYMBOLS.Contains(value))
+                {
+                    this.drawingRepresentation = value;
+                }
+                else
+                {
+                    throw new ArgumentException("The Symbol must be one of the following: K, A, B, C, D");
+                }
             }
         }
 
