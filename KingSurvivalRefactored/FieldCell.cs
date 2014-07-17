@@ -10,8 +10,8 @@ namespace KingSurvivalRefactored
     /// </summary>
     public class FieldCell
     {
-        public const Width = 1;
-        public const Height = 1;
+        public const int Width = 1;
+        public const int Height = 1;
         
         private int coordinateX;
         private int coordinateY;

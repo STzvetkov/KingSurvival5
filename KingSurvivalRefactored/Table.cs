@@ -9,8 +9,8 @@ namespace KingSurvivalRefactored
 {
     public class Table : IEnumerable // Iterator pattern - foreach on Table instance iterates over the table cells
     {
-        public const BaseX = 5;
-        public const BaseY = 5;
+        public const int BaseX = 5;
+        public const int BaseY = 5;
         
         private FieldCell[,] cells;
         private Frame frame;
