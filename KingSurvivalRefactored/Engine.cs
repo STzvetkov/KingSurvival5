@@ -28,41 +28,31 @@ namespace KingSurvivalRefactored
 
             while (true)
             {
-                string input;
-                FieldCell requestedCell = null;
+                string input = ReadMoveInput();
 
-                bool isValidInput;
-                do
+                if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
                 {
-                    input = ReadMoveInput();
-                    isValidInput = Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures);
-                    if (!isValidInput)
-                    {
-                        // Invalid Figure(first letter). Ask the user for new input
-                        Console.WriteLine("Invalid Figure (the first letter).");
-                    }
-                    else
-                    {
-                        currentFigure = ExtractRequestedFigure(input, this.figures);
-                        isValidInput = Checker.Instance.IsValidMove(currentFigure, input);
-                        if (!isValidInput)
-                        {
-                            // Invalid Move. Ask the user for new input
-                            Console.WriteLine("Invalid move.");
-                        }
-                        else
-                        {
-                            requestedCell = ExtractRequestedPosition(input, currentFigure);
-                            isValidInput = Checker.Instance.IsCellAvailable(requestedCell, this.table);
-                            if (!isValidInput)
-                            {
-                                // Cell not free. Ask the user for new input
-                                Console.WriteLine("This cell is not free. Please choose another one.");
-                            }
-                        }
-                    }
-                } while (!isValidInput);
+                    // Invalid Figure(first letter). Ask the user for new input
+                    Console.WriteLine("Invalid Figure (the first letter).");
+                    continue;
+                }
 
+                currentFigure = ExtractRequestedFigure(input, this.figures);
+                if (!(Checker.Instance.IsValidMove(currentFigure, input)))
+                {
+                    // Invalid Move. Ask the user for new input
+                    Console.WriteLine("Invalid move.");
+                    continue;
+                }
+
+                FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
+                if (!(Checker.Instance.IsCellAvailable(requestedCell, this.table)))
+                {
+                    // Cell not free. Ask the user for new input
+                    Console.WriteLine("This cell is not free. Please choose another one.");
+                    continue;
+                }
+                
                 MoveFigure(currentFigure, requestedCell);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
