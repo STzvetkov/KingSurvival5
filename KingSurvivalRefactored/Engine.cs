@@ -134,6 +134,23 @@ namespace KingSurvivalRefactored
         /// <returns>The figures created with cells from the table assigned to them</returns>
         private Figure[] CreateFigures(Table table)
         {
+            var kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
+            var kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
+            FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
+            King theKing = new King(kingInitialPosition, 'K');
+
+            FieldCell APawnInitPosition = table.Cells[0, 0];
+            Pawn APawn = new Pawn(APawnInitPosition, 'A');
+
+            FieldCell BPawnInitPosition = table.Cells[0, 2];
+            Pawn BPawn = new Pawn(BPawnInitPosition, 'B');
+
+            FieldCell CPawnInitPosition = table.Cells[0, 4];
+            Pawn CPawn = new Pawn(CPawnInitPosition, 'C');
+
+            FieldCell DPawnInitPosition = table.Cells[0, 6];
+            Pawn DPawn = new Pawn(DPawnInitPosition, 'D');
+
             // The table is needed to get the cells where we are going to put the figures
             throw new NotImplementedException();
         }

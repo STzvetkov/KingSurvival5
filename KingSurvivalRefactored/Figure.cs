@@ -48,6 +48,10 @@ namespace KingSurvivalRefactored
                 {
                     this.drawingRepresentation = value;
                 }
+                else
+                {
+                    throw new ArgumentException("The Symbol must be one of the following: K, A, B, C, D");
+                }
             }
         }
 
