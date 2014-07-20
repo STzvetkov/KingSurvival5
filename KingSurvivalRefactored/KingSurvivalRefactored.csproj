@@ -48,6 +48,7 @@
     <Compile Include="Figure.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="IFieldCellFactory.cs" />
+    <Compile Include="IFigure.cs" />
     <Compile Include="IFrame.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Pawn.cs" />

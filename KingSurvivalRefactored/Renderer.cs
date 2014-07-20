@@ -47,7 +47,7 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="figureToMove">The figure which image will be moved</param>
         /// <param name="newCell">The cell where the image of the figure will be moved</param>
-        public static void ChangeImagePosition(Figure figureToMove, FieldCell newCell)
+        public static void ChangeImagePosition(IFigure figureToMove, FieldCell newCell)
         {
             Console.SetCursorPosition(figureToMove.ContainingCell.Col, figureToMove.ContainingCell.Row);
             Console.BackgroundColor = figureToMove.ContainingCell.Color;

@@ -34,7 +34,7 @@
         /// True if the figure can perform move in the direction given.
         /// False if it can't
         /// </returns>
-        public bool IsValidMove(Figure figureToCheck, string input)
+        public bool IsValidMove(IFigure figureToCheck, string input)
         {
             // Check if the figure given can move in the direction from the input 
             int len = input.Length;
@@ -142,7 +142,7 @@
         /// True if there is figure with such drawing representation and it is its turn.
         /// False in any other case
         /// </returns>
-        public bool IsValidFigureRequested(int counter, string input, Figure[] figures)
+        public bool IsValidFigureRequested(int counter, string input, IFigure[] figures)
         {
             // Check if it is King's or Pawn's turn with the counter(odd or even) and check if the first letter of the input is correct
             if (counter % 2 != 0)

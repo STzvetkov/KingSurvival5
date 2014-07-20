@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KingSurvivalRefactored
 {
-    public abstract class Figure
+    public abstract class Figure : IFigure
     {
         private FieldCell containingCell;
         private char drawingRepresentation;

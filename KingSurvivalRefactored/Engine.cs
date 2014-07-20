@@ -12,8 +12,8 @@ namespace KingSurvivalRefactored
                 
         private int moveCounter;
         private Table table;
-        private Figure[] figures;
-        private Figure currentFigure;
+        private IFigure[] figures;
+        private IFigure currentFigure;
         private const string FRAME_SORCE_FILE = "test.txt";
         private const byte BORD_SIZE = 8;
         private const char FIELD_RPRESENTATION = '\u2588';
@@ -83,13 +83,13 @@ namespace KingSurvivalRefactored
         /// <param name="input">The user move input</param>
         /// <param name="figures">The figures from which the requested figure will be found</param>
         /// <returns>The figure with the requested drawin representation</returns>
-        private Figure ExtractRequestedFigure(string input, Figure[] figures)
+        private IFigure ExtractRequestedFigure(string input, IFigure[] figures)
         {
             // Get the first letter of the input and find the figure with the same drawingRepresentation from the figures array
             char figureDrawingRepresentation = input[0];
 
             // Figure requested = figures[0];
-            Figure requested = null;
+            IFigure requested = null;
 
 
             for (int i = 0; i < figures.Length; i++)
@@ -127,13 +127,13 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="table">Used to give the Figure instances cells from the table where they will be positioned.</param>
         /// <returns>The figures created with cells from the table assigned to them</returns>
-        private Figure[] CreateFigures(Table table, int pawnsCount)
+        private IFigure[] CreateFigures(Table table, int pawnsCount)
         {
             int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
             int kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
             FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
 
-            Figure[] allFigures = new Figure[pawnsCount + 1];
+            IFigure[] allFigures = new Figure[pawnsCount + 1];
             int firstLetter = 65;
 
 
@@ -183,7 +183,7 @@ namespace KingSurvivalRefactored
         /// <param name="input">The user move input</param>
         /// <param name="currentFigure">The figure that the user wants to move</param>
         /// <returns>Cell with coordinates equal to the ones requested by the user</returns>
-        private FieldCell ExtractRequestedPosition(string input, Figure currentFigure)
+        private FieldCell ExtractRequestedPosition(string input, IFigure currentFigure)
         {
             char directionX = input[input.Length - 1];
             char directionY = input[input.Length - 2];
@@ -220,7 +220,7 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="figureToMove">The figure to be moved</param>
         /// <param name="newCell">The new cell where the figure will be positioned</param>
-        private void MoveFigure(Figure figureToMove, FieldCell newCell)
+        private void MoveFigure(IFigure figureToMove, FieldCell newCell)
         {
             Renderer.ChangeImagePosition(figureToMove, newCell);
             figureToMove.ChangePosition(newCell);
