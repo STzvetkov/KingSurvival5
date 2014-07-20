@@ -64,20 +64,11 @@ namespace KingSurvivalRefactored
             }
         }
 
-        public IEnumerator<FieldCell> GetEnumerator()
-        {
-            for (int i = 0; i < this.cells.GetLength(0); i++)
-            {
-                for (int j = 0; j < this.cells.GetLength(1); j++)
-                {
-                    yield return this.cells[i, j];
-                }
-            }
-        }
+        
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return new TableEnumerator(this);
         }
 
         private void InitializeCells(IFieldCellFactory cellCreator)

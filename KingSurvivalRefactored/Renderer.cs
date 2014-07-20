@@ -23,7 +23,7 @@ namespace KingSurvivalRefactored
             foreach (var cell in tableToDraw)
             {
                 // once the IEnumerable methods in Table are implemented this will compile
-                DrawCell(cell);
+                DrawCell(cell as FieldCell);
             }
         }
 

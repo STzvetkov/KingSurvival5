@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
 {
-    public class TableEnumerator : IEnumerator, IEnumerable
+    public class TableEnumerator : IEnumerator
     {
         //If we need a performance boost, we can make iterationTarget a simple array of cells.
         private readonly Table iterationTarget;
@@ -60,9 +60,6 @@ namespace KingSurvivalRefactored
             }
         }
 
-        public IEnumerator GetEnumerator()
-        {
-            return (IEnumerator)GetEnumerator();
-        }
+        
     }
 }
