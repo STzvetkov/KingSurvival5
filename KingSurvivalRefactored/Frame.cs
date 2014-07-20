@@ -10,7 +10,7 @@ namespace KingSurvivalRefactored
     /// <summary>
     /// Represents the frame around the playing field of the table - the directions and row and column numbers
     /// </summary>
-    public class Frame
+    public class Frame:IFrame
     {
 
         private string image;

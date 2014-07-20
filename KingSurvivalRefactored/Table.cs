@@ -10,9 +10,9 @@ namespace KingSurvivalRefactored
     public class Table : IEnumerable // Iterator pattern - foreach on Table instance iterates over the table cells
     {
         private FieldCell[,] cells;
-        private Frame frame;
+        private IFrame frame;
 
-        public Table(IFieldCellFactory cellCreator, Frame frame)
+        public Table(IFieldCellFactory cellCreator, IFrame frame)
         {
             InitializeCells(cellCreator);
             this.TableFrame = frame;
@@ -47,7 +47,7 @@ namespace KingSurvivalRefactored
                 
         }
 
-        public Frame TableFrame
+        public IFrame TableFrame
         {
             get
             {
