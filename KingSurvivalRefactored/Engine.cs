@@ -187,8 +187,8 @@ namespace KingSurvivalRefactored
         {
             char directionX = input[input.Length - 1];
             char directionY = input[input.Length - 2];
-            int newCellCoordinateX = currentFigure.ContainingCell.CoordinateX;
-            int newCellCoordinateY = currentFigure.ContainingCell.CoordinateY;
+            int newCellCoordinateX = currentFigure.ContainingCell.Col;
+            int newCellCoordinateY = currentFigure.ContainingCell.Row;
 
             if (directionX == 'L')
             {
