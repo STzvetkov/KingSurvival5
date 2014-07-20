@@ -5,8 +5,8 @@ namespace KingSurvivalRefactored
 {
     public class Engine
     {
-        public const int CellWidth = 1;
-        public const int CellHeight = 1;
+        public const int CellWidth = 2;
+        public const int CellHeight = 2;
         public const int TableBaseX = 5;
         public const int TableBaseY = 5;
                 

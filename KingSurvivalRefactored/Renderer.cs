@@ -35,7 +35,7 @@ namespace KingSurvivalRefactored
         {
             int drawContentX = Engine.TableBaseX + cellToDraw.Col * Engine.CellWidth + Engine.CellWidth/2;
             int drawContentY = Engine.TableBaseY + cellToDraw.Row * Engine.CellHeight + Engine.CellHeight/2;
-            Console.SetCursorPosition(drawContentX, drawContentY);
+            Console.SetCursorPosition(drawContentY, drawContentX);
             Console.BackgroundColor = cellToDraw.Color;
             Console.Write(cellToDraw.Value);
             Console.ResetColor();
