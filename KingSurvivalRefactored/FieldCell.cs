@@ -10,24 +10,24 @@ namespace KingSurvivalRefactored
     /// </summary>
     public class FieldCell
     {
-        private int coordinateX;
-        private int coordinateY;
+        private int col;
+        private int row;
         private char value;
         private ConsoleColor color;
 
-        public FieldCell(int coordX, int coordY, char value, ConsoleColor color)
+        public FieldCell(int tablePositionX, int tablePositionY, char value, ConsoleColor color)
         {
-            this.CoordinateX = coordX;
-            this.CoordinateY = coordY;
+            this.Col = tablePositionX;
+            this.Row = tablePositionY;
             this.Value = value;
             this.Color = color;
         }
 
-        public int CoordinateX
+        public int Col
         {
             get
             {
-                return this.coordinateX;
+                return this.col;
             }
 
             set
@@ -36,15 +36,15 @@ namespace KingSurvivalRefactored
                 {
                     throw new ArgumentOutOfRangeException("Coordinate X cannot be less than 0");
                 }
-                this.coordinateX = value;
+                this.col = value;
             }
         }
 
-        public int CoordinateY
+        public int Row
         {
             get
             {
-                return this.coordinateY;
+                return this.row;
             }
 
             set
@@ -53,7 +53,7 @@ namespace KingSurvivalRefactored
                 {
                     throw new ArgumentOutOfRangeException("Coordinate Y cannot be less than 0");
                 }
-                this.coordinateY = value;
+                this.row = value;
             }
         }
 

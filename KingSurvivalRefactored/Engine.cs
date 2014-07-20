@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KingSurvivalRefactored
 {
     public class Engine
     {
+        public const int CellWidth = 2;
+        public const int CellHeight = 2;
+        public const int TableBaseX = 5;
+        public const int TableBaseY = 5;
+                
         private int moveCounter;
         private Table table;
         private Figure[] figures;
@@ -17,6 +19,7 @@ namespace KingSurvivalRefactored
         private const char FIELD_RPRESENTATION = '\u2588';
         private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
         private const ConsoleColor SECOND_FIELD_COLOR = ConsoleColor.Blue;
+
         public Engine()
         {
             this.moveCounter = 0;
@@ -25,7 +28,7 @@ namespace KingSurvivalRefactored
         public void Start()
         {
             this.table = CreateTable();
-            this.figures = CreateFigures(this.table);
+            this.figures = CreateFigures(this.table, 4);
             Renderer.DrawTable(this.table);
 
             while (true)
@@ -36,7 +39,7 @@ namespace KingSurvivalRefactored
                 {
                     // Invalid Figure(first letter). Ask the user for new input
                     Console.WriteLine("Invalid Figure (the first letter).");
-                    input = ReadMoveInput();
+                    continue;
                 }
 
                 currentFigure = ExtractRequestedFigure(input, this.figures);
@@ -44,7 +47,7 @@ namespace KingSurvivalRefactored
                 {
                     // Invalid Move. Ask the user for new input
                     Console.WriteLine("Invalid move.");
-                    input = ReadMoveInput();
+                    continue;
                 }
 
                 FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
@@ -52,9 +55,9 @@ namespace KingSurvivalRefactored
                 {
                     // Cell not free. Ask the user for new input
                     Console.WriteLine("This cell is not free. Please choose another one.");
-                    input = ReadMoveInput();
+                    continue;
                 }
-
+                
                 MoveFigure(currentFigure, requestedCell);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
@@ -83,17 +86,24 @@ namespace KingSurvivalRefactored
         private Figure ExtractRequestedFigure(string input, Figure[] figures)
         {
             // Get the first letter of the input and find the figure with the same drawingRepresentation from the figures array
-            // TODO: check it - Ask user for new input (Tanya)
             char figureDrawingRepresentation = input[0];
 
-            Figure requested = figures[0];
+            // Figure requested = figures[0];
+            Figure requested = null;
+
 
             for (int i = 0; i < figures.Length; i++)
             {
                 if (figures[i].DrawingRepresentation == figureDrawingRepresentation)
                 {
                     requested = figures[i];
+                    break;
                 }
+            }
+
+            if (requested == null)
+            {
+                throw new ArgumentNullException("requested", "Invalid figure requested.");
             }
 
             return requested;
@@ -117,10 +127,28 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="table">Used to give the Figure instances cells from the table where they will be positioned.</param>
         /// <returns>The figures created with cells from the table assigned to them</returns>
-        private Figure[] CreateFigures(Table table)
+        private Figure[] CreateFigures(Table table, int pawnsCount)
         {
-            // The table is needed to get the cells where we are going to put the figures
-            throw new NotImplementedException();
+            int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
+            int kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
+            FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
+
+            Figure[] allFigures = new Figure[pawnsCount + 1];
+            int firstLetter = 65;
+
+
+            King theKing = new King(kingInitialPosition, 'K');
+            allFigures[0] = theKing;
+
+            for (int i = 1; i < allFigures.Length; i++)
+            {
+                FieldCell currentPawnPosition = table.Cells[0, (i - 1) * 2];
+                Pawn currentPawn = new Pawn(currentPawnPosition, (char)firstLetter);
+                allFigures[i] = currentPawn;
+                firstLetter++;
+            }
+
+            return allFigures;
         }
 
         /// <summary>
@@ -159,30 +187,30 @@ namespace KingSurvivalRefactored
         {
             char directionX = input[input.Length - 1];
             char directionY = input[input.Length - 2];
-            int newCellCoordinateX = currentFigure.ContainingCell.CoordinateX;
-            int newCellCoordinateY = currentFigure.ContainingCell.CoordinateY;
+            int newCellCoordinateX = currentFigure.ContainingCell.Col;
+            int newCellCoordinateY = currentFigure.ContainingCell.Row;
 
-            if (directionX=='L')
+            if (directionX == 'L')
             {
                 newCellCoordinateX++;
             }
 
-            if (directionX=='R')
+            if (directionX == 'R')
             {
                 newCellCoordinateX--;
             }
 
-            if (directionY=='U')
+            if (directionY == 'U')
             {
                 newCellCoordinateY--;
             }
 
-            if (directionY=='D')
+            if (directionY == 'D')
             {
                 newCellCoordinateY++;
             }
 
-            return new FieldCell(newCellCoordinateX,newCellCoordinateY,currentFigure.ContainingCell.Value,
+            return new FieldCell(newCellCoordinateX, newCellCoordinateY, currentFigure.ContainingCell.Value,
                                  currentFigure.ContainingCell.Color);
         }
 

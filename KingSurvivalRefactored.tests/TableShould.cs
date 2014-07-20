@@ -25,8 +25,8 @@ namespace KingSurvivalRefactored.tests
                     expectedCell = j + " " + i + " & " + 
                         (IsCurrentOdd?ConsoleColor.Red:ConsoleColor.Blue);
                     IsCurrentOdd = !IsCurrentOdd;
-                    givenCell = testTable.Cells[j,i].CoordinateX + " "
-                        + testTable.Cells[j, i].CoordinateY + " "
+                    givenCell = testTable.Cells[j,i].Col + " "
+                        + testTable.Cells[j, i].Row + " "
                         + testTable.Cells[j, i].Value + " "
                         + testTable.Cells[j, i].Color;
                     if (expectedCell != givenCell)

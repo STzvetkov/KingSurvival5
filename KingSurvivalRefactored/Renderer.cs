@@ -23,7 +23,7 @@ namespace KingSurvivalRefactored
             foreach (var cell in tableToDraw)
             {
                 // once the IEnumerable methods in Table are implemented this will compile
-                //DrawCell(cell);
+                DrawCell(cell);
             }
         }
 
@@ -33,7 +33,9 @@ namespace KingSurvivalRefactored
         /// <param name="cellToDraw">The cell to be drawn</param>
         private static void DrawCell(FieldCell cellToDraw)
         {
-            Console.SetCursorPosition(cellToDraw.CoordinateX, cellToDraw.CoordinateY);
+            int drawContentX = Engine.TableBaseX + cellToDraw.Col * Engine.CellWidth + Engine.CellWidth/2;
+            int drawContentY = Engine.TableBaseY + cellToDraw.Row * Engine.CellHeight + Engine.CellHeight/2;
+            Console.SetCursorPosition(drawContentY, drawContentX);
             Console.BackgroundColor = cellToDraw.Color;
             Console.Write(cellToDraw.Value);
             Console.ResetColor();
@@ -47,10 +49,10 @@ namespace KingSurvivalRefactored
         /// <param name="newCell">The cell where the image of the figure will be moved</param>
         public static void ChangeImagePosition(Figure figureToMove, FieldCell newCell)
         {
-            Console.SetCursorPosition(figureToMove.ContainingCell.CoordinateX, figureToMove.ContainingCell.CoordinateY);
+            Console.SetCursorPosition(figureToMove.ContainingCell.Col, figureToMove.ContainingCell.Row);
             Console.BackgroundColor = figureToMove.ContainingCell.Color;
             Console.Write(EmptyCell);
-            Console.SetCursorPosition(newCell.CoordinateX, newCell.CoordinateY);
+            Console.SetCursorPosition(newCell.Col, newCell.Row);
             Console.BackgroundColor = newCell.Color;
             Console.Write(figureToMove.DrawingRepresentation);
         }
