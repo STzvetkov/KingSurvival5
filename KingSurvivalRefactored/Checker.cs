@@ -6,12 +6,21 @@
     public class Checker // To be made Singleton
     {
         private const char EmptyCell = ' ';
+        private static Checker instance;
+
+        private Checker()
+        {
+        }
 
         public static Checker Instance
         {
             get
             {
-                return new Checker();
+                if (instance == null)
+                {
+                    instance = new Checker();
+                }
+                return instance;
             }
         }
 
@@ -139,7 +148,7 @@
             if (counter % 2 != 0)
             {
                 // It's King's turn
-                if (input[0] == 'K')
+                if (input[0] == figures[0].DrawingRepresentation)
                 {
                     return true;
                 }
@@ -147,9 +156,10 @@
             else
             {
                 // It's pawn's turn
+                char currentFigureDrawingRepresentation;
                 for (int i = 0; i < figures.Length; i++)
                 {
-                    char currentFigureDrawingRepresentation = figures[i].DrawingRepresentation;
+                    currentFigureDrawingRepresentation = figures[i].DrawingRepresentation;
                     if (currentFigureDrawingRepresentation == input[0])
                     {
                         return true;
