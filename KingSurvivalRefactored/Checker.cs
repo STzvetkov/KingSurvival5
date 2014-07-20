@@ -66,7 +66,7 @@
             int tableRows = table.Cells.GetLength(0);
             int tableCols = table.Cells.GetLength(1);
 
-            if (cell.CoordinateX > 0 && cell.CoordinateX < tableRows && cell.CoordinateY > 0 && cell.CoordinateY < tableCols)
+            if (cell.Col > 0 && cell.Col < tableRows && cell.Row > 0 && cell.Row < tableCols)
             {
                 if (cell.IsFree)
                 {
@@ -85,7 +85,7 @@
         public bool HasKingWon(King king)
         {
             // Check if king reached the top of the board
-            if (king.ContainingCell.CoordinateY == 0)
+            if (king.ContainingCell.Row == 0)
             {
                 return true;
             }
@@ -107,16 +107,16 @@
             // Check if king has any valid moves left
             FieldCell currKingCell = king.ContainingCell;
 
-            FieldCell upLeftCell = table.Cells[currKingCell.CoordinateX - 1, currKingCell.CoordinateY - 1];
+            FieldCell upLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row - 1];
             bool isUpperLeftCellFree = this.IsCellAvailable(upLeftCell, table);
 
-            FieldCell upRightCell = table.Cells[currKingCell.CoordinateX + 1, currKingCell.CoordinateY - 1];
+            FieldCell upRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row - 1];
             bool isUpperRightCellFree = this.IsCellAvailable(upRightCell, table);
 
-            FieldCell downLeftCell = table.Cells[currKingCell.CoordinateX - 1, currKingCell.CoordinateY + 1];
+            FieldCell downLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row + 1];
             bool isDownLeftCellCellFree = this.IsCellAvailable(downLeftCell, table);
 
-            FieldCell downRightCell = table.Cells[currKingCell.CoordinateX + 1, currKingCell.CoordinateY + 1];
+            FieldCell downRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row + 1];
             bool isDownRightCellCellFree = this.IsCellAvailable(downRightCell, table);
 
             if (isUpperLeftCellFree || isUpperRightCellFree || isDownLeftCellCellFree || isDownRightCellCellFree)

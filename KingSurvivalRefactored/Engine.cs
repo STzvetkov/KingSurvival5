@@ -5,8 +5,8 @@ namespace KingSurvivalRefactored
 {
     public class Engine
     {
-        public const int CellWidth = 1;
-        public const int CellHeight = 1;
+        public const int CellWidth = 2;
+        public const int CellHeight = 2;
         public const int TableBaseX = 5;
         public const int TableBaseY = 5;
                 
@@ -187,8 +187,8 @@ namespace KingSurvivalRefactored
         {
             char directionX = input[input.Length - 1];
             char directionY = input[input.Length - 2];
-            int newCellCoordinateX = currentFigure.ContainingCell.CoordinateX;
-            int newCellCoordinateY = currentFigure.ContainingCell.CoordinateY;
+            int newCellCoordinateX = currentFigure.ContainingCell.Col;
+            int newCellCoordinateY = currentFigure.ContainingCell.Row;
 
             if (directionX == 'L')
             {
