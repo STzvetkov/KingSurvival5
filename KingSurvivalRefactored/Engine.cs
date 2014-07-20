@@ -5,6 +5,11 @@ namespace KingSurvivalRefactored
 {
     public class Engine
     {
+        public const int CellWidth = 1;
+        public const int CellHeight = 1;
+        public const int TableBaseX = 5;
+        public const int TableBaseY = 5;
+                
         private int moveCounter;
         private Table table;
         private Figure[] figures;
@@ -23,7 +28,7 @@ namespace KingSurvivalRefactored
         public void Start()
         {
             this.table = CreateTable();
-            this.figures = CreateFigures(this.table);
+            this.figures = CreateFigures(this.table, 4);
             Renderer.DrawTable(this.table);
 
             while (true)
@@ -122,26 +127,26 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="table">Used to give the Figure instances cells from the table where they will be positioned.</param>
         /// <returns>The figures created with cells from the table assigned to them</returns>
-        private Figure[] CreateFigures(Table table)
+        private Figure[] CreateFigures(Table table, int pawnsCount)
         {
-            var kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
-            var kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
+            int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
+            int kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
             FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
+
+            Figure[] allFigures = new Figure[pawnsCount + 1];
+            int firstLetter = 65;
+
+
             King theKing = new King(kingInitialPosition, 'K');
+            allFigures[0] = theKing;
 
-            FieldCell APawnInitPosition = table.Cells[0, 0];
-            Pawn APawn = new Pawn(APawnInitPosition, 'A');
-
-            FieldCell BPawnInitPosition = table.Cells[0, 2];
-            Pawn BPawn = new Pawn(BPawnInitPosition, 'B');
-
-            FieldCell CPawnInitPosition = table.Cells[0, 4];
-            Pawn CPawn = new Pawn(CPawnInitPosition, 'C');
-
-            FieldCell DPawnInitPosition = table.Cells[0, 6];
-            Pawn DPawn = new Pawn(DPawnInitPosition, 'D');
-
-            Figure[] allFigures = new Figure[5] { theKing, APawn, BPawn, CPawn, DPawn };
+            for (int i = 1; i < allFigures.Length; i++)
+            {
+                FieldCell currentPawnPosition = table.Cells[0, (i - 1) * 2];
+                Pawn currentPawn = new Pawn(currentPawnPosition, (char)firstLetter);
+                allFigures[i] = currentPawn;
+                firstLetter++;
+            }
 
             return allFigures;
         }

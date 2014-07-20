@@ -9,9 +9,6 @@ namespace KingSurvivalRefactored
 {
     public class Table : IEnumerable // Iterator pattern - foreach on Table instance iterates over the table cells
     {
-        public const int BaseX = 5;
-        public const int BaseY = 5;
-        
         private FieldCell[,] cells;
         private Frame frame;
 
@@ -67,9 +64,20 @@ namespace KingSurvivalRefactored
             }
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<FieldCell> GetEnumerator()
         {
-            return new TableEnumerator(this);
+            for (int i = 0; i < this.cells.GetLength(0); i++)
+            {
+                for (int j = 0; j < this.cells.GetLength(1); j++)
+                {
+                    yield return this.cells[i, j];
+                }
+            }
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
         private void InitializeCells(IFieldCellFactory cellCreator)
