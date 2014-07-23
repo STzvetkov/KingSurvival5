@@ -15,8 +15,12 @@ namespace KingSurvivalRefactored
     {
 
         private string image;
+        private int height;
+        private int width;
         public Frame(string pathToFrameImage)
         {
+            this.Width = 0;
+            this.Height = 0;
             this.image = ReadImage(pathToFrameImage);
         }
         public string Image
@@ -29,6 +33,38 @@ namespace KingSurvivalRefactored
             private set
             {
                 this.image = value;
+            }
+        }
+
+        public int Width
+        {
+            get 
+            {
+                return this.width;
+            }
+            private set
+            {
+                if (value < 0 || value > Console.LargestWindowWidth)
+                {
+                    throw new ArgumentOutOfRangeException("The frame is too wide to fit the console window");
+                }
+                this.width = value;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return this.height;
+            }
+            private set
+            {
+                if (value < 0 || value > Console.LargestWindowHeight)
+                {
+                    throw new ArgumentOutOfRangeException("The frame is too high to fit the console window");
+                }
+                this.height = value;
             }
         }
 
@@ -45,9 +81,15 @@ namespace KingSurvivalRefactored
             using (StreamReader imageReader = new StreamReader(path))
             {
                 string readLineBuffer = imageReader.ReadLine();
+                this.Width = readLineBuffer.Length;
                 while (readLineBuffer != null)
                 {
                     result.Append(readLineBuffer + "\n");
+                    this.Height++;
+                    if (readLineBuffer.Length > this.Width)
+                    {
+                        this.Width = readLineBuffer.Length;
+                    }
                     readLineBuffer = imageReader.ReadLine();
                 }
             }

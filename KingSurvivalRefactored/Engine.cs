@@ -6,26 +6,25 @@ namespace KingSurvivalRefactored
 {
     public class Engine
     {
-        public const int distanceBetweenCellsX = 1;
-        public const int distanceBetweenCellsY = 0;
-        public const int consoleInitialPositionX = 4;
-        public const int consoleInitialPositionY = 3;
-                
+        private const int DistanceBetweenCellsX = 1;
+        private const int DistanceBetweenCellsY = 0;
+        private const int ConsoleInitialPositionX = 4;
+        private const int ConsoleInitialPositionY = 3;
+        private const string FrameSourceFile = "../../test.txt";
+        private const byte BoardSize = 8;
+        private const char FieldRepresentation = ' ';
+        private const ConsoleColor FirstFieldColor = ConsoleColor.Green;
+        private const ConsoleColor SecondFieldColor = ConsoleColor.Blue;
+                        
         private int moveCounter;
         private Table table;
         private IFigure[] figures;
         private IFigure currentFigure;
         private ConsoleRenderer rendrer;
-        private const string FRAME_SOURCE_FILE = "../../test.txt";
-        private const byte BOARD_SIZE = 8;
-        private const char FIELD_REPRESENTATION = ' ';
-        private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
-        private const ConsoleColor SECOND_FIELD_COLOR = ConsoleColor.Blue;
-
         public Engine()
         {
             this.moveCounter = 0;
-            this.rendrer = new ConsoleRenderer(distanceBetweenCellsX, distanceBetweenCellsY, consoleInitialPositionX, consoleInitialPositionY);
+            this.rendrer = new ConsoleRenderer(DistanceBetweenCellsX, DistanceBetweenCellsY, ConsoleInitialPositionX, ConsoleInitialPositionY);
         }
 
         public void Start()
@@ -33,12 +32,22 @@ namespace KingSurvivalRefactored
             this.table = CreateTable();
             this.figures = CreateFigures(this.table, 4);
             this.rendrer.DrawTable(this.table);
+            bool validInput = false;
 
             while (true)
             {
-                string input = ReadMoveInput();
+                if (validInput)
+                {
+                    ClearConsoleLines(this.table.Frame.Height + 1, 3);
+                }
+                else
+                {
+                    ClearConsoleLines(this.table.Frame.Height + 2, 3);
+                }
+                string input = ReadMoveInput(this.moveCounter);
+                Console.SetCursorPosition(0, this.table.Frame.Height + 1);
 
-                if (!(Checker.Instance.IsValidFigureRequested(moveCounter, input, this.figures)))
+                if (!(Checker.Instance.IsValidFigureRequested(this.moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
                     Console.WriteLine("Invalid Figure (the first letter).");
@@ -57,10 +66,11 @@ namespace KingSurvivalRefactored
                 if (!(Checker.Instance.IsCellAvailable(requestedCell, this.table)))
                 {
                     // Cell not free. Ask the user for new input
-                    Console.WriteLine("This cell is not free. Please choose another one.");
+                    Console.WriteLine("The chosen cell is not free.");
                     continue;
                 }
-                
+
+                validInput = true;
                 MoveFigure(currentFigure, requestedCell);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
@@ -120,9 +130,9 @@ namespace KingSurvivalRefactored
         /// <returns>The table created</returns>
         private Table CreateTable()
         {
-            FieldCellFactory cellCreator = new FieldCellFactory(BOARD_SIZE, BOARD_SIZE,
-                FIELD_REPRESENTATION, FIRST_FIELD_COLOR, SECOND_FIELD_COLOR);
-            return new Table(cellCreator, new Frame(FRAME_SOURCE_FILE));
+            FieldCellFactory cellCreator = new FieldCellFactory(BoardSize, BoardSize,
+                FieldRepresentation, FirstFieldColor, SecondFieldColor);
+            return new Table(cellCreator, new Frame(FrameSourceFile));
         }
 
         /// <summary>
@@ -157,24 +167,35 @@ namespace KingSurvivalRefactored
         /// Asks the user to enter his next move, saves it to a string variable and returns it.
         /// </summary>
         /// <returns>The user move input</returns>
-        private string ReadMoveInput()
+        private string ReadMoveInput(int moveCounter)
         {
-            string input;
             // Ask the user to enter the next move, save it to a string variable and return it
             if (moveCounter % 2 != 0)
             {
                 // It's King's turn
                 Console.WriteLine("Please enter king's turn: ");
-                input = Console.ReadLine();
             }
             else
             {
                 // It's pawn's turn
                 Console.WriteLine("Please enter pawn's turn: ");
-                input = Console.ReadLine();
             }
 
+            string input = Console.ReadLine();
             return input.Trim();
+        }
+
+        private void ClearConsoleLines(int startingLine, int linesCount)
+        {
+            Console.SetCursorPosition(0, startingLine);
+            for (int i = 0; i < linesCount; i++)
+            {
+                for (int j = 0; j < Console.WindowWidth; j++)
+                {
+                    Console.Write(' ');
+                }
+            }
+            Console.SetCursorPosition(0, startingLine);
         }
 
         /// <summary>

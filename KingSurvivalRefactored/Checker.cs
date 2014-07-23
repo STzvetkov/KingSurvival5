@@ -159,7 +159,7 @@
             {
                 // It's pawn's turn
                 char currentFigureDrawingRepresentation;
-                for (int i = 0; i < figures.Length; i++)
+                for (int i = 1; i < figures.Length; i++)
                 {
                     currentFigureDrawingRepresentation = figures[i].DrawingRepresentation;
                     if (currentFigureDrawingRepresentation == input[0])
