@@ -8,6 +8,14 @@ namespace KingSurvivalRefactored
 {
     public class FieldCellFactory:IFieldCellFactory
     {
+        private bool currentCellIsOdd;
+        private int colCount;
+        private int rowCount;
+        private int currentCol;
+        private int currentRow;
+        private readonly ConsoleColor evenColor;
+        private readonly ConsoleColor oddColor;
+        private readonly char representationChar;
 
         public FieldCellFactory(int rowCount, int colCount, char representationChar, ConsoleColor evenColor, ConsoleColor oddColor)
         {
@@ -23,7 +31,7 @@ namespace KingSurvivalRefactored
         
         public FieldCell GenerateNextCell()
         {
-            ConsoleColor currentCellColor = currentCellIsOdd?oddColor:evenColor;
+            ConsoleColor currentCellColor = currentCellIsOdd ? oddColor : evenColor;
             FieldCell result = new FieldCell(currentCol, currentRow, representationChar,
                 currentCellColor);
             currentCol++;
@@ -31,6 +39,7 @@ namespace KingSurvivalRefactored
             {
                 currentCol = 0;
                 currentRow++;
+                currentCellIsOdd = !currentCellIsOdd;
                 if (currentRow > RowCount)
                 {
                     throw new InvalidOperationException("All cells were generated.");
@@ -73,13 +82,5 @@ namespace KingSurvivalRefactored
                 this.colCount = value;
             }
         }
-        private bool currentCellIsOdd;
-        private int colCount;
-        private int rowCount;
-        private int currentCol;
-        private int currentRow;
-        private readonly ConsoleColor evenColor;
-        private readonly ConsoleColor oddColor;
-        private readonly char representationChar;
     }
 }

@@ -9,6 +9,7 @@ namespace KingSurvivalRefactored
     public interface IWeiter
     {
         ConsoleColor BackgroundColor { set; }
+        ConsoleColor ForegroundColor { set; }
         void SetCursorPosition(int x, int y);
         void Write(char input);
         void Write(string input);

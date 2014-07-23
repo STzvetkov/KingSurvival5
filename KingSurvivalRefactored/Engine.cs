@@ -5,18 +5,18 @@ namespace KingSurvivalRefactored
 {
     public class Engine
     {
+        public const int CellHeight = 1;
         public const int CellWidth = 2;
-        public const int CellHeight = 2;
-        public const int TableBaseX = 5;
-        public const int TableBaseY = 5;
+        public const int TableBaseX = 3;
+        public const int TableBaseY = 3;
                 
         private int moveCounter;
         private Table table;
         private IFigure[] figures;
         private IFigure currentFigure;
-        private const string FRAME_SORCE_FILE = "test.txt";
+        private const string FRAME_SORCE_FILE = "../../test.txt";
         private const byte BORD_SIZE = 8;
-        private const char FIELD_RPRESENTATION = '\u2588';
+        private const char FIELD_RPRESENTATION = ' ';
         private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
         private const ConsoleColor SECOND_FIELD_COLOR = ConsoleColor.Blue;
 
@@ -130,7 +130,7 @@ namespace KingSurvivalRefactored
         private IFigure[] CreateFigures(Table table, int pawnsCount)
         {
             int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
-            int kingInitCol = table.Cells.GetLength(1) / 2; // This gets the center of the columns
+            int kingInitCol = table.Cells.GetLength(1) / 2 - 1; // This gets the center of the columns
             FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
 
             IFigure[] allFigures = new Figure[pawnsCount + 1];

@@ -44,9 +44,17 @@ namespace KingSurvivalRefactored
         /// <param name="cellToDraw">The cell to be drawn</param>
         private static void DrawCell(FieldCell cellToDraw)
         {
-            int drawContentX = Engine.TableBaseX + cellToDraw.Col * Engine.CellWidth + Engine.CellWidth/2;
-            int drawContentY = Engine.TableBaseY + cellToDraw.Row * Engine.CellHeight + Engine.CellHeight/2;
-            outputWriter.SetCursorPosition(drawContentY, drawContentX);
+            int drawPositionX = Engine.TableBaseX + cellToDraw.Col * Engine.CellWidth + Engine.CellWidth / 2;
+            int drawPositionY = Engine.TableBaseY + cellToDraw.Row * Engine.CellHeight + Engine.CellHeight / 2;
+            outputWriter.SetCursorPosition(drawPositionX, drawPositionY);
+            if (cellToDraw.IsFree)
+            {
+                outputWriter.ForegroundColor = cellToDraw.Color;
+            }
+            else
+            {
+                outputWriter.ForegroundColor = ConsoleColor.Black;
+            }
             outputWriter.BackgroundColor = cellToDraw.Color;
             outputWriter.Write(cellToDraw.Value);
             outputWriter.ResetColor();

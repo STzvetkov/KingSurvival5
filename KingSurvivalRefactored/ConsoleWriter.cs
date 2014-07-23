@@ -16,6 +16,14 @@ namespace KingSurvivalRefactored
             }
         }
 
+        public ConsoleColor ForegroundColor
+        {
+            set
+            {
+                Console.ForegroundColor = value;
+            }
+        }
+
         public void SetCursorPosition(int x, int y)
         {
             Console.SetCursorPosition(x, y);

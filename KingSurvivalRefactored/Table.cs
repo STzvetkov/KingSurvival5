@@ -77,12 +77,12 @@ namespace KingSurvivalRefactored
             {
                 throw new ArgumentNullException("Class table cant correctly initialize with a null reference for a cellCreator");
             }
-            FieldCell[,] cells = new FieldCell[cellCreator.ColCount,cellCreator.RowCount ];
+            FieldCell[,] cells = new FieldCell[cellCreator.RowCount ,cellCreator.ColCount];
             for (int i = 0; i < cellCreator.RowCount; i++)
             {
                 for (int j = 0; j < cellCreator.ColCount; j++)
                 {
-                    cells[j, i] = cellCreator.GenerateNextCell();
+                    cells[i, j] = cellCreator.GenerateNextCell();
                 }
             }
             this.Cells=cells;
