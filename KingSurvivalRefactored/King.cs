@@ -8,7 +8,7 @@ namespace KingSurvivalRefactored
 {
     public class King : Figure
     {
-        private readonly string[] DirectionsAvailable = { "dl", "dr", "ul", "ur" };
+        private readonly string[] DirectionsAvailable = { "DL", "DR", "UL", "UR" };
         public King(ICell position, char drawingRepresentation) : 
             base(position, drawingRepresentation)
         {

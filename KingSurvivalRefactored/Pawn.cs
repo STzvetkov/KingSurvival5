@@ -8,7 +8,7 @@ namespace KingSurvivalRefactored
 {
     public class Pawn : Figure
     {
-        private readonly string[] DirectionsAvailable = { "dl", "dr" };
+        private readonly string[] DirectionsAvailable = { "DL", "DR" };
         public Pawn(ICell position, char drawingRepresentation) :
             base(position, drawingRepresentation)
         {

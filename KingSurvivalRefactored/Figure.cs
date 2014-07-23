@@ -70,9 +70,11 @@ namespace KingSurvivalRefactored
         /// Changes the cell in which the current figure is positioned.
         /// </summary>
         /// <param name="newCell">The new cell in which the figure will be positioned</param>
-        public void ChangePosition(FieldCell newCell)
+        public void ChangePosition(ICell newCell)
         {
-            throw new System.NotImplementedException();
+            this.ContainingCell.Value = ' ';
+            newCell.Value = this.DrawingRepresentation;
+            this.ContainingCell = newCell;
         }
 
     }

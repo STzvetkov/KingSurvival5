@@ -182,7 +182,7 @@ namespace KingSurvivalRefactored
             }
 
             string input = Console.ReadLine();
-            return input.Trim();
+            return input.Trim().ToUpper();
         }
 
         private void ClearConsoleLines(int startingLine, int linesCount)

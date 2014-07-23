@@ -63,16 +63,23 @@
         /// <param name="cell">Cell with coordinates equal to the ones requested by the user</param>
         /// <param name="table">The table containing the cells in which the search is performed</param>
         /// <returns>True if such cell exists and it is free. False in any other case</returns>
-        public bool IsCellAvailable(ICell cell, Table table)
+        public bool IsCellAvailable(ICell cell, ITable table)
         {
             int tableRows = table.Cells.GetLength(0);
             int tableCols = table.Cells.GetLength(1);
 
-            if (cell.Col > 0 && cell.Col < tableRows && cell.Row > 0 && cell.Row < tableCols)
+            for (int i = 0; i < tableRows; i++)
             {
-                if (cell.IsFree)
+                for (int j = 0; j < tableCols; j++)
                 {
-                    return true;
+                    var currentCell = table.Cells[i, j];
+                    if (currentCell.Row == cell.Row && currentCell.Col == cell.Col)
+                    {
+                        if (currentCell.IsFree)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
 
