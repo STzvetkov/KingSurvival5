@@ -50,7 +50,9 @@ namespace KingSurvivalRefactored
                 if (!(Checker.Instance.IsValidFigureRequested(this.moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
+                    ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("Invalid Figure (the first letter).");
+                    validInput = false;
                     continue;
                 }
 
@@ -58,7 +60,9 @@ namespace KingSurvivalRefactored
                 if (!(Checker.Instance.IsValidMove(currentFigure, input)))
                 {
                     // Invalid Move. Ask the user for new input
+                    ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("Invalid move.");
+                    validInput = false;
                     continue;
                 }
 
@@ -66,15 +70,19 @@ namespace KingSurvivalRefactored
                 if (!(Checker.Instance.IsCellAvailable(requestedCell, this.table)))
                 {
                     // Cell not free. Ask the user for new input
-                    Console.WriteLine("The chosen cell is not free.");
+                    ClearConsoleLines(Console.CursorTop, 1);
+                    Console.WriteLine("The chosen cell is not available.");
+                    validInput = false;
                     continue;
                 }
 
                 validInput = true;
                 MoveFigure(currentFigure, requestedCell);
+                Console.SetCursorPosition(0, this.table.Frame.Height + 1);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
                     // king won message
+                    ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("King wins!");
                     break;
                 }
@@ -82,6 +90,7 @@ namespace KingSurvivalRefactored
                 if (Checker.Instance.HasKingLost(this.figures[0] as King, this.table))
                 {
                     //king lost message 
+                    ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("King lost!");
                     break;
                 }
@@ -208,19 +217,19 @@ namespace KingSurvivalRefactored
         /// <returns>Cell with coordinates equal to the ones requested by the user</returns>
         private FieldCell ExtractRequestedPosition(string input, IFigure currentFigure)
         {
-            char directionX = input[input.Length - 1];
-            char directionY = input[input.Length - 2];
+            char directionY = input[1];
+            char directionX = input[2];
             int newCellCoordinateX = currentFigure.ContainingCell.Col;
             int newCellCoordinateY = currentFigure.ContainingCell.Row;
 
             if (directionX == 'L')
             {
-                newCellCoordinateX++;
+                newCellCoordinateX--;
             }
 
             if (directionX == 'R')
             {
-                newCellCoordinateX--;
+                newCellCoordinateX++;
             }
 
             if (directionY == 'U')
@@ -243,10 +252,10 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="figureToMove">The figure to be moved</param>
         /// <param name="newCell">The new cell where the figure will be positioned</param>
-        private void MoveFigure(IFigure figureToMove, FieldCell newCell)
+        private void MoveFigure(IFigure figureToMove, ICell newCell)
         {
             this.rendrer.ChangeImagePosition(figureToMove, newCell);
-            figureToMove.ChangePosition(newCell);
+            figureToMove.ChangePosition(newCell, this.table);
         }
     }
 }

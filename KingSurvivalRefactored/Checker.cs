@@ -111,24 +111,55 @@
         /// True if all of the cells checked are either taken by another figure 
         /// or are outside of the table - do not exist in the table parameter
         /// </returns>
-        public bool HasKingLost(King king, Table table)
+        public bool HasKingLost(King king, ITable table)
         {
-            // Check if king has any valid moves left
-            ICell currKingCell = king.ContainingCell;
+            int kingRow = king.ContainingCell.Row;
+            int kingCol = king.ContainingCell.Col;
+            int tableHeight = table.Cells.GetLength(0);
+            int tableWidth = table.Cells.GetLength(1);
 
-            ICell upLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row - 1];
-            bool isUpperLeftCellFree = this.IsCellAvailable(upLeftCell, table);
+            bool isUpperLeftCellFree;
+            bool isUpperRightCellFree;
+            bool isLowerLeftCellFree;
+            bool isLowerRightCellFree;
+            
+            if (kingRow > 0 && kingCol > 0)
+            {
+                isUpperLeftCellFree = table.Cells[kingRow - 1, kingCol - 1].IsFree;
+            }
+            else
+            {
+                isUpperLeftCellFree = false;
+            }
 
-            ICell upRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row - 1];
-            bool isUpperRightCellFree = this.IsCellAvailable(upRightCell, table);
+            if (kingRow > 0 && kingCol < tableWidth - 1)
+            {
+                isUpperRightCellFree = table.Cells[kingRow - 1, kingCol + 1].IsFree;
+            }
+            else
+            {
+                isUpperRightCellFree = false;
+            }
 
-            ICell downLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row + 1];
-            bool isDownLeftCellCellFree = this.IsCellAvailable(downLeftCell, table);
+            if (kingRow < tableHeight - 1 && kingCol > 0)
+            {
+                isLowerLeftCellFree = table.Cells[kingRow + 1, kingCol - 1].IsFree;
+            }
+            else
+            {
+                isLowerLeftCellFree = false;
+            }
 
-            ICell downRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row + 1];
-            bool isDownRightCellCellFree = this.IsCellAvailable(downRightCell, table);
-
-            if (isUpperLeftCellFree || isUpperRightCellFree || isDownLeftCellCellFree || isDownRightCellCellFree)
+            if (kingRow < tableHeight -1 && kingCol < tableWidth - 1)
+            {
+                isLowerRightCellFree = table.Cells[kingRow + 1, kingCol + 1].IsFree;
+            }
+            else
+            {
+                isLowerRightCellFree = false;
+            }
+            
+            if (isUpperLeftCellFree || isUpperRightCellFree || isLowerLeftCellFree || isLowerRightCellFree)
             {
                 return false;
             }

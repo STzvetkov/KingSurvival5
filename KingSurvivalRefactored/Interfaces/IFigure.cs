@@ -11,6 +11,6 @@ namespace KingSurvivalRefactored.Interfaces
         ICell ContainingCell { get; set;}
         char DrawingRepresentation { get; set; }
         string[] AllowedMoves { get; }
-        void ChangePosition(ICell newCell);
+        void ChangePosition(ICell newCell, ITable table);
     }
 }

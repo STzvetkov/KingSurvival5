@@ -10,6 +10,7 @@ namespace KingSurvivalRefactored
     {
         private ICell containingCell;
         private char drawingRepresentation;
+        // TODO: fix the valid symbols
         private char[] VALID_SYMBOLS = {'K', 'A', 'B', 'C', 'D'};
 
         public Figure(ICell containingCell, char drawingRepresentation)
@@ -70,10 +71,11 @@ namespace KingSurvivalRefactored
         /// Changes the cell in which the current figure is positioned.
         /// </summary>
         /// <param name="newCell">The new cell in which the figure will be positioned</param>
-        public void ChangePosition(ICell newCell)
+        public void ChangePosition(ICell newCell, ITable table)
         {
-            this.ContainingCell.Value = ' ';
+            table.Cells[this.ContainingCell.Row, this.ContainingCell.Col].Value = ' ';
             newCell.Value = this.DrawingRepresentation;
+            table.Cells[newCell.Row, newCell.Col].Value = newCell.Value;
             this.ContainingCell = newCell;
         }
 
