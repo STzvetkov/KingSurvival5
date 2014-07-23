@@ -4,25 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KingSurvivalRefactored.Interfaces;
+
 
 namespace KingSurvivalRefactored
 {
-    public class Table : IEnumerable // Iterator pattern - foreach on Table instance iterates over the table cells
+    public class Table : IEnumerable, ITable // Iterator pattern - foreach on Table instance iterates over the table cells
     {
-        private FieldCell[,] cells;
+        private ICell[,] cells;
         private IFrame frame;
-
+        
         public Table(IFieldCellFactory cellCreator, IFrame frame)
         {
             InitializeCells(cellCreator);
-            this.TableFrame = frame;
+            this.Frame = frame;
         }
 
-        public FieldCell[,] Cells
+        public ICell[,] Cells
         {
             get
             {
-                return cells;
+                return this.cells;
             }
 
             private set
@@ -47,7 +49,7 @@ namespace KingSurvivalRefactored
                 
         }
 
-        public IFrame TableFrame
+        public IFrame Frame
         {
             get
             {

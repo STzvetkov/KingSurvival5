@@ -1,5 +1,7 @@
 ﻿namespace KingSurvivalRefactored
 {
+    using KingSurvivalRefactored.Interfaces;
+
     /// <summary>
     /// A class used to perform various checks on figures and cells
     /// </summary>
@@ -61,7 +63,7 @@
         /// <param name="cell">Cell with coordinates equal to the ones requested by the user</param>
         /// <param name="table">The table containing the cells in which the search is performed</param>
         /// <returns>True if such cell exists and it is free. False in any other case</returns>
-        public bool IsCellAvailable(FieldCell cell, Table table)
+        public bool IsCellAvailable(ICell cell, Table table)
         {
             int tableRows = table.Cells.GetLength(0);
             int tableCols = table.Cells.GetLength(1);
@@ -105,18 +107,18 @@
         public bool HasKingLost(King king, Table table)
         {
             // Check if king has any valid moves left
-            FieldCell currKingCell = king.ContainingCell;
+            ICell currKingCell = king.ContainingCell;
 
-            FieldCell upLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row - 1];
+            ICell upLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row - 1];
             bool isUpperLeftCellFree = this.IsCellAvailable(upLeftCell, table);
 
-            FieldCell upRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row - 1];
+            ICell upRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row - 1];
             bool isUpperRightCellFree = this.IsCellAvailable(upRightCell, table);
 
-            FieldCell downLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row + 1];
+            ICell downLeftCell = table.Cells[currKingCell.Col - 1, currKingCell.Row + 1];
             bool isDownLeftCellCellFree = this.IsCellAvailable(downLeftCell, table);
 
-            FieldCell downRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row + 1];
+            ICell downRightCell = table.Cells[currKingCell.Col + 1, currKingCell.Row + 1];
             bool isDownRightCellCellFree = this.IsCellAvailable(downRightCell, table);
 
             if (isUpperLeftCellFree || isUpperRightCellFree || isDownLeftCellCellFree || isDownRightCellCellFree)

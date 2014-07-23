@@ -48,15 +48,18 @@
     <Compile Include="FieldCellFactory.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="Frame.cs" />
-    <Compile Include="IFieldCellFactory.cs" />
-    <Compile Include="IFigure.cs" />
-    <Compile Include="IFrame.cs" />
-    <Compile Include="IWeiter.cs" />
+    <Compile Include="Interfaces\ICell.cs" />
+    <Compile Include="Interfaces\IFieldCellFactory.cs" />
+    <Compile Include="Interfaces\IFigure.cs" />
+    <Compile Include="Interfaces\IFrame.cs" />
+    <Compile Include="Interfaces\IRenderer.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
+    <Compile Include="Interfaces\IWriter.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Pawn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderer.cs" />
+    <Compile Include="ConsoleRenderer.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="TableEnumerator.cs" />
   </ItemGroup>

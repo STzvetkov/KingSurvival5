@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using KingSurvivalRefactored.Interfaces;
 
 namespace KingSurvivalRefactored
 {
     public abstract class Figure : IFigure
     {
-        private FieldCell containingCell;
+        private ICell containingCell;
         private char drawingRepresentation;
         private char[] VALID_SYMBOLS = {'K', 'A', 'B', 'C', 'D'};
 
-        public Figure(FieldCell containingCell, char drawingRepresentation)
+        public Figure(ICell containingCell, char drawingRepresentation)
         {
             this.ContainingCell = containingCell;
             this.DrawingRepresentation = drawingRepresentation; // probably not needed
@@ -21,7 +22,7 @@ namespace KingSurvivalRefactored
         /// <summary>
         /// The cell in which the figure is positioned
         /// </summary>
-        public FieldCell ContainingCell
+        public ICell ContainingCell
         {
             get
             {

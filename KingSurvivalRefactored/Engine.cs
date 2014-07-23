@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using KingSurvivalRefactored.Interfaces;
 
 namespace KingSurvivalRefactored
 {
@@ -14,22 +15,24 @@ namespace KingSurvivalRefactored
         private Table table;
         private IFigure[] figures;
         private IFigure currentFigure;
-        private const string FRAME_SORCE_FILE = "../../test.txt";
-        private const byte BORD_SIZE = 8;
-        private const char FIELD_RPRESENTATION = ' ';
+        private ConsoleRenderer rendrer;
+        private const string FRAME_SOURCE_FILE = "../../test.txt";
+        private const byte BOARD_SIZE = 8;
+        private const char FIELD_REPRESENTATION = ' ';
         private const ConsoleColor FIRST_FIELD_COLOR = ConsoleColor.Green;
         private const ConsoleColor SECOND_FIELD_COLOR = ConsoleColor.Blue;
 
         public Engine()
         {
             this.moveCounter = 0;
+            this.rendrer = new ConsoleRenderer();
         }
 
         public void Start()
         {
             this.table = CreateTable();
             this.figures = CreateFigures(this.table, 4);
-            Renderer.DrawTable(this.table);
+            ConsoleRenderer.DrawTable(this.table);
 
             while (true)
             {
@@ -117,9 +120,9 @@ namespace KingSurvivalRefactored
         /// <returns>The table created</returns>
         private Table CreateTable()
         {
-            FieldCellFactory cellCreator = new FieldCellFactory(BORD_SIZE, BORD_SIZE,
-                FIELD_RPRESENTATION, FIRST_FIELD_COLOR, SECOND_FIELD_COLOR);
-            return new Table(cellCreator, new Frame(FRAME_SORCE_FILE));
+            FieldCellFactory cellCreator = new FieldCellFactory(BOARD_SIZE, BOARD_SIZE,
+                FIELD_REPRESENTATION, FIRST_FIELD_COLOR, SECOND_FIELD_COLOR);
+            return new Table(cellCreator, new Frame(FRAME_SOURCE_FILE));
         }
 
         /// <summary>
@@ -131,18 +134,17 @@ namespace KingSurvivalRefactored
         {
             int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
             int kingInitCol = table.Cells.GetLength(1) / 2 - 1; // This gets the center of the columns
-            FieldCell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
+            ICell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
 
             IFigure[] allFigures = new Figure[pawnsCount + 1];
             int firstLetter = 65;
-
 
             King theKing = new King(kingInitialPosition, 'K');
             allFigures[0] = theKing;
 
             for (int i = 1; i < allFigures.Length; i++)
             {
-                FieldCell currentPawnPosition = table.Cells[0, (i - 1) * 2];
+                ICell currentPawnPosition = table.Cells[0, (i - 1) * 2];
                 Pawn currentPawn = new Pawn(currentPawnPosition, (char)firstLetter);
                 allFigures[i] = currentPawn;
                 firstLetter++;
@@ -222,7 +224,7 @@ namespace KingSurvivalRefactored
         /// <param name="newCell">The new cell where the figure will be positioned</param>
         private void MoveFigure(IFigure figureToMove, FieldCell newCell)
         {
-            Renderer.ChangeImagePosition(figureToMove, newCell);
+            ConsoleRenderer.ChangeImagePosition(figureToMove, newCell);
             figureToMove.ChangePosition(newCell);
         }
     }

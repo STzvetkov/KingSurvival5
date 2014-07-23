@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KingSurvivalRefactored.Interfaces;
 
 namespace KingSurvivalRefactored
 {
@@ -13,7 +14,7 @@ namespace KingSurvivalRefactored
         private readonly Table iterationTarget;
         private int currentX;
         private int currentY;
-        private FieldCell lastCell;
+        private ICell lastCell;
         //will be needed to trace the state of the enumerator
         public TableEnumerator(Table table){
 

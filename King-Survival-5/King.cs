@@ -40,6 +40,7 @@ namespace KingSurvivalGame
                             if (col % 4 == 0)
                             {
                                 //i neka byde zelenina
+                                
                                 Console.BackgroundColor = ConsoleColor.Green;
                                 //tva go prai cherno
                                 Console.ForegroundColor = ConsoleColor.Black;

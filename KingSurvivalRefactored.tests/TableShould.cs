@@ -15,7 +15,7 @@ namespace KingSurvivalRefactored.tests
             FieldCellFactory testFactory = new FieldCellFactory(8, 8, '&', ConsoleColor.Blue, ConsoleColor.Red);
             Table testTable = new Table(testFactory, new Frame("test.txt"));
             bool testISValid=true;
-            bool IsCurrentOdd = true;
+            bool isCurrentOdd = true;
             string expectedCell="";
             string givenCell = "";
             for (int i = 0; i < 8; i++)
@@ -23,8 +23,8 @@ namespace KingSurvivalRefactored.tests
                 for (int j = 0; j < 8; j++)
                 {
                     expectedCell = j + " " + i + " & " + 
-                        (IsCurrentOdd?ConsoleColor.Red:ConsoleColor.Blue);
-                    IsCurrentOdd = !IsCurrentOdd;
+                        (isCurrentOdd?ConsoleColor.Red:ConsoleColor.Blue);
+                    isCurrentOdd = !isCurrentOdd;
                     givenCell = testTable.Cells[j,i].Col + " "
                         + testTable.Cells[j, i].Row + " "
                         + testTable.Cells[j, i].Value + " "
@@ -39,9 +39,9 @@ namespace KingSurvivalRefactored.tests
                 Console.WriteLine( );
                 Assert.IsTrue(testISValid, "One of the cells wasn't initialized or returned properly.\nExpected:"
                     + expectedCell + "\nGiven:\n" + givenCell);
-            Assert.AreEqual(testTable.TableFrame.Image, expectedFrameImage,
+            Assert.AreEqual(testTable.Frame.Image, expectedFrameImage,
                 "The frame image isn't the expected one.\nImageGiven by the table:\n"
-                + testTable.TableFrame.Image + "\nExpected Image:\n"
+                + testTable.Frame.Image + "\nExpected Image:\n"
                 + expectedFrameImage);
         }
     }

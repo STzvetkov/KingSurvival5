@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using KingSurvivalRefactored.Interfaces;
 
 namespace KingSurvivalRefactored
 {
     /// <summary>
     /// Represents a cell from the playing field of the table
     /// </summary>
-    public class FieldCell
+    public class FieldCell : Interfaces.ICell
     {
         private int col;
         private int row;
@@ -30,7 +31,7 @@ namespace KingSurvivalRefactored
                 return this.col;
             }
 
-            set
+            private set
             {
                 if (value < 0)
                 {
@@ -47,7 +48,7 @@ namespace KingSurvivalRefactored
                 return this.row;
             }
 
-            set
+            private set
             {
                 if (value < 0)
                 {
@@ -87,7 +88,7 @@ namespace KingSurvivalRefactored
                 return this.color;
             }
 
-            set 
+            private set 
             {
                 this.color = value;
             }

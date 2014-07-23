@@ -3,30 +3,32 @@
   <Class Name="KingSurvivalRefactored.Pawn">
     <Position X="7.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Pawn.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="KingSurvivalRefactored.King">
     <Position X="9" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>King.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="KingSurvivalRefactored.FieldCell">
     <Position X="2.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAICCAAGAggABAAAA=</HashCode>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAQACAAEAAiCAAAAggAAAAAA=</HashCode>
       <FileName>FieldCell.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="KingSurvivalRefactored.Figure">
     <Position X="8" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAYAAAAAAAAAAAAAAAAAAAAAAAAADAAEAAQAAAAQ=</HashCode>
       <FileName>Figure.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
