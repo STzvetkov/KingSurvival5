@@ -6,10 +6,10 @@ namespace KingSurvivalRefactored
 {
     public class Engine
     {
-        public const int CellHeight = 1;
-        public const int CellWidth = 2;
-        public const int TableBaseX = 3;
-        public const int TableBaseY = 3;
+        public const int distanceBetweenCellsX = 1;
+        public const int distanceBetweenCellsY = 0;
+        public const int consoleInitialPositionX = 4;
+        public const int consoleInitialPositionY = 3;
                 
         private int moveCounter;
         private Table table;
@@ -25,14 +25,14 @@ namespace KingSurvivalRefactored
         public Engine()
         {
             this.moveCounter = 0;
-            this.rendrer = new ConsoleRenderer();
+            this.rendrer = new ConsoleRenderer(distanceBetweenCellsX, distanceBetweenCellsY, consoleInitialPositionX, consoleInitialPositionY);
         }
 
         public void Start()
         {
             this.table = CreateTable();
             this.figures = CreateFigures(this.table, 4);
-            ConsoleRenderer.DrawTable(this.table);
+            this.rendrer.DrawTable(this.table);
 
             while (true)
             {
@@ -224,7 +224,7 @@ namespace KingSurvivalRefactored
         /// <param name="newCell">The new cell where the figure will be positioned</param>
         private void MoveFigure(IFigure figureToMove, FieldCell newCell)
         {
-            ConsoleRenderer.ChangeImagePosition(figureToMove, newCell);
+            this.rendrer.ChangeImagePosition(figureToMove, newCell);
             figureToMove.ChangePosition(newCell);
         }
     }
