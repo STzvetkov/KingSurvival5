@@ -60,9 +60,9 @@ namespace KingSurvivalRefactored
             }
             private set
             {
-                if (value<1)
+                if (value < 8 || value > 20)
                 {
-                    throw new ArgumentOutOfRangeException("The number of rows must be greater than 0");
+                    throw new ArgumentOutOfRangeException("The number of rows must be between 8 and 20");
                 }
                 this.rowCount = value;
             }
@@ -76,9 +76,9 @@ namespace KingSurvivalRefactored
             }
             private set
             {
-                if (value<1)
+                if (value < 8 || value > 20)
                 {
-                    throw new ArgumentOutOfRangeException("The number of columns must be greater than 0");
+                    throw new ArgumentOutOfRangeException("The number of columns must be between 8 and 20");
                 }
                 this.colCount = value;
             }
