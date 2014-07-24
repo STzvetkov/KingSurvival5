@@ -57,36 +57,6 @@
         }
 
         /// <summary>
-        /// Searches if the table has cell with coordinates the same as the cell given and 
-        /// if the cell with the same coordinates is free.
-        /// </summary>
-        /// <param name="cell">Cell with coordinates equal to the ones requested by the user</param>
-        /// <param name="table">The table containing the cells in which the search is performed</param>
-        /// <returns>True if such cell exists and it is free. False in any other case</returns>
-        public bool IsCellAvailable(ICell cell, ITable table)
-        {
-            int tableRows = table.Cells.GetLength(0);
-            int tableCols = table.Cells.GetLength(1);
-
-            for (int i = 0; i < tableRows; i++)
-            {
-                for (int j = 0; j < tableCols; j++)
-                {
-                    var currentCell = table.Cells[i, j];
-                    if (currentCell.Row == cell.Row && currentCell.Col == cell.Col)
-                    {
-                        if (currentCell.IsFree)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
         /// Checks the Y position of the king.
         /// </summary>
         /// <param name="king">The king to be checked</param>
@@ -207,6 +177,16 @@
                 }
             }
 
+            return false;
+        }
+
+        public bool IsRequestedPositionInsideTable(int newX, int newY, ITable table) 
+        {
+            if (newY >=0 && newY < table.Cells.GetLength(0) && 
+                newX >= 0 && newX < table.Cells.GetLength(1))
+            {
+                return true;
+            }
             return false;
         }
     }

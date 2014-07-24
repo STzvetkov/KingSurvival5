@@ -66,14 +66,28 @@ namespace KingSurvivalRefactored
                     continue;
                 }
 
-                FieldCell requestedCell = ExtractRequestedPosition(input, currentFigure);
-                if (!(Checker.Instance.IsCellAvailable(requestedCell, this.table)))
+                int requestedCoordinateX = ExtractRequestedCoordinateX(input, currentFigure);
+                int requestedCoordinateY = ExtractRequestedCoordinateY(input, currentFigure);
+                ICell requestedCell;
+
+                if (!(Checker.Instance.IsRequestedPositionInsideTable(requestedCoordinateX, requestedCoordinateY, table)))
                 {
-                    // Cell not free. Ask the user for new input
                     ClearConsoleLines(Console.CursorTop, 1);
-                    Console.WriteLine("The chosen cell is not available.");
+                    Console.WriteLine("There is no cell in the chosen direction.");
                     validInput = false;
                     continue;
+                }
+
+                else
+                {
+                    requestedCell = table.Cells[requestedCoordinateY, requestedCoordinateX];
+                    if (!requestedCell.IsFree)
+                    {
+                        ClearConsoleLines(Console.CursorTop, 1);
+                        Console.WriteLine("The chosen cell is not free.");
+                        validInput = false;
+                        continue;
+                    }
                 }
 
                 validInput = true;
@@ -207,43 +221,36 @@ namespace KingSurvivalRefactored
             Console.SetCursorPosition(0, startingLine);
         }
 
-        /// <summary>
-        /// Extracts the last two letters of the user input. 
-        /// Calculates the coordinates of the cell requested with the input according to the currentFigure.
-        /// Creates a new cell with the requested coordinates
-        /// </summary>
-        /// <param name="input">The user move input</param>
-        /// <param name="currentFigure">The figure that the user wants to move</param>
-        /// <returns>Cell with coordinates equal to the ones requested by the user</returns>
-        private FieldCell ExtractRequestedPosition(string input, IFigure currentFigure)
+        private int ExtractRequestedCoordinateX(string input, IFigure currentFigure)
         {
-            char directionY = input[1];
-            char directionX = input[2];
-            int newCellCoordinateX = currentFigure.ContainingCell.Col;
-            int newCellCoordinateY = currentFigure.ContainingCell.Row;
-
-            if (directionX == 'L')
+            if (input[2] == 'L')
             {
-                newCellCoordinateX--;
+                return currentFigure.ContainingCell.Col - 1;
             }
-
-            if (directionX == 'R')
+            else if (input[2] == 'R')
             {
-                newCellCoordinateX++;
+                return currentFigure.ContainingCell.Col + 1;
             }
-
-            if (directionY == 'U')
+            else
             {
-                newCellCoordinateY--;
+                throw new ArgumentException("Invalid input");
             }
+        }
 
-            if (directionY == 'D')
+        private int ExtractRequestedCoordinateY(string input, IFigure currentFigure)
+        {
+            if (input[1] == 'U')
             {
-                newCellCoordinateY++;
+                return currentFigure.ContainingCell.Row - 1;
             }
-
-            return new FieldCell(newCellCoordinateX, newCellCoordinateY, currentFigure.ContainingCell.Value,
-                                 currentFigure.ContainingCell.Color);
+            else if (input[1] == 'D')
+            {
+                return currentFigure.ContainingCell.Row + 1;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input");
+            }
         }
 
         /// <summary>
