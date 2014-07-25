@@ -38,6 +38,8 @@
         /// </returns>
         public bool IsValidMove(IFigure figureToCheck, string input)
         {
+            input = input.ToUpper();
+
             // Check if the figure given can move in the direction from the input 
             int len = input.Length;
             string lastTwoLetters = input[len - 2].ToString() + input[len - 1];
@@ -154,6 +156,7 @@
         /// </returns>
         public bool IsValidFigureRequested(int counter, string input, IFigure[] figures)
         {
+            input = input.ToUpper();
             // Check if it is King's or Pawn's turn with the counter(odd or even) and check if the first letter of the input is correct
             if (counter % 2 != 0)
             {

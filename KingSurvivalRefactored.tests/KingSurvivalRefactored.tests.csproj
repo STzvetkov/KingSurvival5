@@ -53,6 +53,7 @@
     <Compile Include="TableShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EngineShould.cs" />
+    <Compile Include="CheckerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KingSurvivalRefactored\KingSurvivalRefactored.csproj">
