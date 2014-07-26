@@ -11,12 +11,12 @@ namespace KingSurvivalRefactored
         private const int ConsoleInitialPositionX = 4;
         private const int ConsoleInitialPositionY = 3;
         private const string FrameSourceFile = "../../test.txt";
-        private const byte BoardSize = 8;
         private const char FieldRepresentation = ' ';
         private const ConsoleColor FirstFieldColor = ConsoleColor.Green;
         private const ConsoleColor SecondFieldColor = ConsoleColor.Blue;
-        private const int PawnsTotalCount = 4;
-                        
+
+        private int boardSize;
+        private int pawnsTotalCount;
         private int moveCounter;
         private Table table;
         private IFigure[] figures;
@@ -30,8 +30,9 @@ namespace KingSurvivalRefactored
 
         public void Start()
         {
+            EnterBoardSize();
             this.table = CreateTable();
-            this.figures = CreateFigures(this.table, PawnsTotalCount);
+            this.figures = CreateFigures(this.table, pawnsTotalCount);
             this.rendrer.DrawTable(this.table);
             bool validInput = false;
 
@@ -115,6 +116,37 @@ namespace KingSurvivalRefactored
         }
 
         /// <summary>
+        /// Read board size from the console
+        /// </summary>
+        /// <returns>No return value</returns>
+        private void EnterBoardSize()
+        {
+            bool validInput;
+            bool validSize = false;
+            string boardSizeInput;
+            do
+            {
+                Console.WriteLine("Enter board size (8-20): ");
+                boardSizeInput = Console.ReadLine();
+                validInput = int.TryParse(boardSizeInput, out this.boardSize);
+                if (!validInput)
+                {
+                    Console.WriteLine("The input is incorrect: ");
+                }
+                else 
+                {
+                    validSize = this.boardSize >= 8 || this.boardSize <= 20;
+                    if (!validSize)
+                    {
+                        Console.WriteLine("The entered number is not within the limits: ");
+                    }
+                }
+            } while (!validSize);
+            this.pawnsTotalCount = this.boardSize / 2;
+            ClearConsoleLines(0, Console.WindowHeight);
+        }
+
+        /// <summary>
         /// Extracts the first letter of the input and finds the figure with the same drawing representation
         /// </summary>
         /// <param name="input">The user move input</param>
@@ -154,7 +186,7 @@ namespace KingSurvivalRefactored
         /// <returns>The table created</returns>
         private Table CreateTable()
         {
-            FieldCellFactory cellCreator = new FieldCellFactory(BoardSize, BoardSize,
+            FieldCellFactory cellCreator = new FieldCellFactory(boardSize, boardSize,
                 FieldRepresentation, FirstFieldColor, SecondFieldColor);
             return new Table(cellCreator, new Frame(FrameSourceFile));
         }
