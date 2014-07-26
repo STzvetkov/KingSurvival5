@@ -15,6 +15,7 @@ namespace KingSurvivalRefactored
         private const char FieldRepresentation = ' ';
         private const ConsoleColor FirstFieldColor = ConsoleColor.Green;
         private const ConsoleColor SecondFieldColor = ConsoleColor.Blue;
+        private const int PawnsTotalCount = 4;
                         
         private int moveCounter;
         private Table table;
@@ -30,7 +31,7 @@ namespace KingSurvivalRefactored
         public void Start()
         {
             this.table = CreateTable();
-            this.figures = CreateFigures(this.table, 4);
+            this.figures = CreateFigures(this.table, PawnsTotalCount);
             this.rendrer.DrawTable(this.table);
             bool validInput = false;
 

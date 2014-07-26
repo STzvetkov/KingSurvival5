@@ -10,14 +10,14 @@ namespace KingSurvivalRefactored
     public class FigureFactory:IFigureFactory
     {
         private IFigure[] allFigures;
-        private int pawnCount;
+        private int pawnCount; // The number of the pawns can be calculated automaticaly based on the size of the Board. But for now it is passed as parameter.
         private Table table;
         
 
         public FigureFactory(Table table, int pawnCount) {
             this.Table = table;
             this.PawnCount = pawnCount;
-            this.allFigures = new IFigure[this.PawnCount + 1];
+            this.AllFigures = new IFigure[this.PawnCount + 1];
         }
 
         public IFigure[] GenerateFigures()
@@ -29,9 +29,9 @@ namespace KingSurvivalRefactored
             int firstLetter = 65;
 
             King theKing = new King(kingInitialPosition, 'K');
-            allFigures[0] = theKing;
+            AllFigures[0] = theKing;
 
-            for (int i = 1; i < allFigures.Length; i++)
+            for (int i = 1; i < AllFigures.Length; i++)
             {
                 ICell currentPawnPosition = table.Cells[0, (i - 1) * 2];
                 Pawn currentPawn = new Pawn(currentPawnPosition, (char)firstLetter);
@@ -39,20 +39,39 @@ namespace KingSurvivalRefactored
                 firstLetter++;
             }
 
-            return allFigures;
+            return AllFigures;
         }
 
         public int PawnCount
         {
             get { return this.pawnCount; }
-            set { this.pawnCount = value; }
+            set
+            {
+                if (value < 2 || value > 10)
+                {
+                    throw new ArgumentOutOfRangeException("The number of pawns must be between 2 and 10");
+                }
+                this.pawnCount = value;
+            }
         }
 
-        Table Table
+        private Table Table
         {
             set 
             {
                 this.table = value;
+            }
+        }
+
+        private IFigure[] AllFigures 
+        {
+            set 
+            {
+                this.allFigures = value;
+            }
+            get
+            {
+                return this.allFigures;
             }
         }
     }
