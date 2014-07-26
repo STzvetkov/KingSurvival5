@@ -48,10 +48,12 @@
     <Compile Include="FieldCell.cs" />
     <Compile Include="FieldCellFactory.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="FigureFactory.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="Interfaces\ICell.cs" />
     <Compile Include="Interfaces\IFieldCellFactory.cs" />
     <Compile Include="Interfaces\IFigure.cs" />
+    <Compile Include="Interfaces\IFigureFactory.cs" />
     <Compile Include="Interfaces\IFrame.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\ITable.cs" />

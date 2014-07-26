@@ -165,25 +165,8 @@ namespace KingSurvivalRefactored
         /// <returns>The figures created with cells from the table assigned to them</returns>
         private IFigure[] CreateFigures(Table table, int pawnsCount)
         {
-            int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
-            int kingInitCol = table.Cells.GetLength(1) / 2 - 1; // This gets the center of the columns
-            ICell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
-
-            IFigure[] allFigures = new Figure[pawnsCount + 1];
-            int firstLetter = 65;
-
-            King theKing = new King(kingInitialPosition, 'K');
-            allFigures[0] = theKing;
-
-            for (int i = 1; i < allFigures.Length; i++)
-            {
-                ICell currentPawnPosition = table.Cells[0, (i - 1) * 2];
-                Pawn currentPawn = new Pawn(currentPawnPosition, (char)firstLetter);
-                allFigures[i] = currentPawn;
-                firstLetter++;
-            }
-
-            return allFigures;
+            IFigureFactory figureCreator = new FigureFactory(table, pawnsCount);
+            return figureCreator.GenerateFigures();
         }
 
         /// <summary>
