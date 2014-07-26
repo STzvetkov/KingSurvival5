@@ -27,8 +27,15 @@ namespace KingSurvivalRefactored
             this.ConsoleInitialPositionX = consoleInitialPositionX;
             this.ConsoleInitialPositionY = consoleInitialPositionY;
             this.outputWriter = new ConsoleWriter();
-        }
 
+        }
+        public ConsoleRenderer(int distanceBetweenCellsX, int distanceBetweenCellsY,
+            int consoleInitialPositionX, int consoleInitialPositionY,IWriter outputWriter):
+            this(distanceBetweenCellsX,distanceBetweenCellsY,
+            consoleInitialPositionX,consoleInitialPositionY)
+        {
+            this.outputWriter = outputWriter;
+        }
         public int DistanceBetweenCellsX
         {
             get
