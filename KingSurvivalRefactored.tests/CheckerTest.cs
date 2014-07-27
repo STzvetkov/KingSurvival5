@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored.tests
+﻿namespace KingSurvivalRefactored.Tests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using KingSurvivalRefactored.Interfaces;
+
     [TestClass]
     public class CheckerTest
     {
@@ -207,7 +207,7 @@ namespace KingSurvivalRefactored.tests
         {
             return new King(new FieldCell(kingRow, kingCol, 'K', ConsoleColor.Blue), 'K');
         }
-        
+
         private IFigure[] GetFigures()
         {
             IFigure[] figures = new IFigure[]

@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Threading.Tasks;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+    using System.Text;
+    using System.IO;
+    using KingSurvivalRefactored.Interfaces;
+
     /// <summary>
     /// Represents the frame around the playing field of the table - the directions and row and column numbers
     /// </summary>
-    public class Frame:IFrame
+    public class Frame : IFrame
     {
-
         private string image;
         private int height;
         private int width;
+
         public Frame(string pathToFrameImage)
         {
             this.Width = 0;
             this.Height = 0;
             this.image = ReadImage(pathToFrameImage);
         }
+
         public string Image
         {
             get
@@ -38,16 +36,18 @@ namespace KingSurvivalRefactored
 
         public int Width
         {
-            get 
+            get
             {
                 return this.width;
             }
+
             private set
             {
                 if (value < 0 || value > Console.LargestWindowWidth)
                 {
                     throw new ArgumentOutOfRangeException("The frame is too wide to fit the console window");
                 }
+
                 this.width = value;
             }
         }
@@ -58,12 +58,14 @@ namespace KingSurvivalRefactored
             {
                 return this.height;
             }
+
             private set
             {
                 if (value < 0 || value > Console.LargestWindowHeight)
                 {
                     throw new ArgumentOutOfRangeException("The frame is too high to fit the console window");
                 }
+
                 this.height = value;
             }
         }
@@ -73,7 +75,7 @@ namespace KingSurvivalRefactored
         /// </summary>
         /// <param name="path">The path to the text file containing only the image of the frame</param>
         /// <returns>String with the drawing representation of the frame</returns>
-        private string ReadImage(string path) 
+        private string ReadImage(string path)
         {
             StringBuilder result = new StringBuilder();
             //may be handling the exception when the file is not present
@@ -86,13 +88,16 @@ namespace KingSurvivalRefactored
                 {
                     result.Append(readLineBuffer + "\n");
                     this.Height++;
+
                     if (readLineBuffer.Length > this.Width)
                     {
                         this.Width = readLineBuffer.Length;
                     }
+
                     readLineBuffer = imageReader.ReadLine();
                 }
             }
+
             return result.ToString();
         }
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+    using KingSurvivalRefactored.Interfaces;
+    
     class ConsoleWriter:IWriter
     {
         public ConsoleColor BackgroundColor

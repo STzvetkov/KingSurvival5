@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-using System.Threading.Tasks;
-
-namespace KingSurvivalRefactored.Interfaces
+﻿namespace KingSurvivalRefactored.Interfaces
 {
+    using System.Collections;
+
     public interface ITable: IEnumerable
     {
         ICell[,] Cells { get; }
+
         IFrame Frame { get; }
     }
 }

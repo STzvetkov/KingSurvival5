@@ -8,20 +8,25 @@ namespace KingSurvivalRefactored
     {
         private const int DistanceBetweenCellsX = 1;
         private const int DistanceBetweenCellsY = 0;
+
         private const int ConsoleInitialPositionX = 4;
         private const int ConsoleInitialPositionY = 3;
+
         private const string FrameSourceFile = "../../test.txt";
         private const char FieldRepresentation = ' ';
+
         private const ConsoleColor FirstFieldColor = ConsoleColor.Green;
         private const ConsoleColor SecondFieldColor = ConsoleColor.Blue;
 
         private int boardSize;
         private int pawnsTotalCount;
         private int moveCounter;
+
         private Table table;
         private IFigure[] figures;
         private IFigure currentFigure;
         private ConsoleRenderer rendrer;
+
         public Engine()
         {
             this.moveCounter = 0;
@@ -46,6 +51,7 @@ namespace KingSurvivalRefactored
                 {
                     ClearConsoleLines(this.table.Frame.Height + 2, 3);
                 }
+
                 string input = ReadMoveInput(this.moveCounter);
                 Console.SetCursorPosition(0, this.table.Frame.Height + 1);
 
@@ -238,6 +244,7 @@ namespace KingSurvivalRefactored
                     Console.Write(' ');
                 }
             }
+
             Console.SetCursorPosition(0, startingLine);
         }
 

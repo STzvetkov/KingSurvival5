@@ -12,13 +12,15 @@ namespace KingSurvivalRefactored
     {
         //If we need a performance boost, we can make iterationTarget a simple array of cells.
         private readonly Table iterationTarget;
+
         private int currentX;
         private int currentY;
-        private ICell lastCell;
-        //will be needed to trace the state of the enumerator
-        public TableEnumerator(Table table){
 
-            
+        private ICell lastCell;
+
+        //will be needed to trace the state of the enumerator
+        public TableEnumerator(Table table)
+        {
             if (table == null)
             {
                 throw new ArgumentNullException("The Enumerator can not work with a uninitialized table.");
@@ -27,9 +29,11 @@ namespace KingSurvivalRefactored
             {
                 throw new ArgumentOutOfRangeException("The Enumerator cant work with a empty table.");
             }
+
             this.iterationTarget = table;
             this.Reset();
         }
+
         public bool MoveNext()
         {
             this.currentX++;
@@ -42,6 +46,7 @@ namespace KingSurvivalRefactored
                     return false;
                 }
             }
+
             this.lastCell = this.iterationTarget.Cells[this.currentX, this.currentY];
             return true;
         }
@@ -60,7 +65,5 @@ namespace KingSurvivalRefactored
                 return lastCell;
             }
         }
-
-        
     }
 }
