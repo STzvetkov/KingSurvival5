@@ -15,8 +15,12 @@ namespace KingSurvivalRefactored.tests
         const int CONSOLE_INITIAL_POSITION_Y = 3;
         ConsoleRenderer CreateConsoleRenderer()
         {
+            return CreateConsoleRenderer(new TestWriter());
+        }
+        ConsoleRenderer CreateConsoleRenderer(IWriter testwriter)
+        {
             return new ConsoleRenderer(DISTANCE_BETWEEN_CELLS_X, DISTANCE_BETWEEN_CELLS_Y,
-                CONSOLE_INITIAL_POSITION_X, CONSOLE_INITIAL_POSITION_Y,new TestWriter());
+                CONSOLE_INITIAL_POSITION_X, CONSOLE_INITIAL_POSITION_Y, testwriter);
         }
         [TestMethod]
         public void returnDistanceBetweenCellsHorizontallyCorrectly()
@@ -73,10 +77,8 @@ namespace KingSurvivalRefactored.tests
             //Initialize the test writer
             TestWriter testWriter =   new TestWriter();
             //Create the renderer 
-            IRenderer testRenderer = new ConsoleRenderer(DISTANCE_BETWEEN_CELLS_X, DISTANCE_BETWEEN_CELLS_Y,
-                CONSOLE_INITIAL_POSITION_X, CONSOLE_INITIAL_POSITION_Y,testWriter);
+            IRenderer testRenderer = CreateConsoleRenderer(testWriter);
             testRenderer.DrawTable(mockedTable.Object);
-            //Printed 'This is a test image' at x:0 y:0 colors bg: black fg: white Printed '\0' at x:24 y:14 colors bg: Black fg: Black
             string result  = testWriter.GetResult();
             //Correctly draw image
             Assert.IsTrue(result.Contains("Printed '" + testImage + "' at x:0 y:0 colors bg: black fg: white"),
@@ -90,6 +92,57 @@ namespace KingSurvivalRefactored.tests
                 "The test cell wasn't printed or was printed at the wrong place or with the wrong color\n The renderer printed:\n"
                 + result + "\nIt was expected to contain " + cellTextRepresentation);
        
+
+        }
+        [TestMethod]
+        public void ChangeImagePositionCorrectly()
+        {
+            int oldCellX=10;
+            int oldCellY=10;
+            char oldCellSymbol='C';
+            Mock<ICell> oldCell = new Mock<ICell>();
+            oldCell.Setup(r => r.Col).Returns(oldCellX);
+            oldCell.Setup(r => r.Row).Returns(oldCellY);
+            oldCell.Setup(r => r.IsFree).Returns(false);
+            oldCell.Setup(r => r.Color).Returns(ConsoleColor.Black);
+            oldCell.Setup(r => r.Value).Returns(oldCellSymbol);
+
+            int newCellX = 12;
+            int newCellY = 12;
+            char newCellSymbol = 'N';
+            Mock<ICell> newCell = new Mock<ICell>();
+            newCell.Setup(r => r.Col).Returns(newCellX);
+            newCell.Setup(r => r.Row).Returns(newCellY);
+            newCell.Setup(r => r.IsFree).Returns(true);
+            newCell.Setup(r => r.Color).Returns(ConsoleColor.Black);
+            newCell.Setup(r => r.Value).Returns(newCellSymbol);
+            char figureRepresentation = 'F';
+            Mock<IFigure> mockedFigure = new Mock<IFigure>();
+            mockedFigure.Setup(r => r.ContainingCell).Returns(oldCell.Object);
+            mockedFigure.Setup(r => r.DrawingRepresentation).Returns(figureRepresentation);
+            //Create the renderer
+            TestWriter testWriter = new TestWriter();
+            IRenderer testedRenderer= CreateConsoleRenderer(testWriter);
+            //call the function 
+            testedRenderer.ChangeImagePosition(mockedFigure.Object,newCell.Object);
+            string result = testWriter.GetResult();
+            
+            //Check if the old cell is represented as empty
+            string expectedCellRepresentation =  "Printed ' ' at x:"+ (CONSOLE_INITIAL_POSITION_X + oldCellX * (DISTANCE_BETWEEN_CELLS_X+1))
+                + " y:" + (CONSOLE_INITIAL_POSITION_Y + oldCellY * (DISTANCE_BETWEEN_CELLS_Y + 1)) 
+                +" colors bg: Black";
+            Assert.IsTrue(result.Contains(expectedCellRepresentation),
+                "The old cell wasn't cleared as expected\n Expected occurrence of :\n"
+                + expectedCellRepresentation + "\n Actual output : \n" + result);
+
+            //Check to see if the figure is drawn correctly
+            string expectedFigureRepresentation = "Printed '"+figureRepresentation
+                + "' at x:" + (CONSOLE_INITIAL_POSITION_X + newCellX * (DISTANCE_BETWEEN_CELLS_X + 1))
+                + " y:" + (CONSOLE_INITIAL_POSITION_Y + newCellY * (DISTANCE_BETWEEN_CELLS_Y + 1))
+                + " colors bg: Black fg: Black";
+            Assert.IsTrue(result.Contains(expectedFigureRepresentation),
+                "The new cell and figure wasn't cleared as expected\n Expected occurrence of :\n"
+                + expectedFigureRepresentation + "\n Actual output : \n" + result);
 
         }
     }
