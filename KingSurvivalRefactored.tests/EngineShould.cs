@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace KingSurvivalRefactored.tests
+﻿namespace KingSurvivalRefactored.Tests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class EngineShould
     {

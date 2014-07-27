@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+
     /// <summary>
     /// Represents a cell from the playing field of the table
     /// </summary>
@@ -37,6 +33,7 @@ namespace KingSurvivalRefactored
                 {
                     throw new ArgumentOutOfRangeException("Coordinate X cannot be less than 0");
                 }
+
                 this.col = value;
             }
         }
@@ -54,6 +51,7 @@ namespace KingSurvivalRefactored
                 {
                     throw new ArgumentOutOfRangeException("Coordinate Y cannot be less than 0");
                 }
+
                 this.row = value;
             }
         }
@@ -64,6 +62,7 @@ namespace KingSurvivalRefactored
             {
                 return this.value;
             }
+
             set
             {
                 this.value = value;
@@ -71,7 +70,7 @@ namespace KingSurvivalRefactored
         }
 
         /// <summary>
-        /// Checks if the cell is empty
+        /// Gets a value indicating whether the cell is empty
         /// </summary>
         public bool IsFree
         {

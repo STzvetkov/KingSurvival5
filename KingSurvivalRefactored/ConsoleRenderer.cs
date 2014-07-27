@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+    using KingSurvivalRefactored.Interfaces;
+
     /// <summary>
     /// A class used to perform the drawing on the console
     /// </summary>
@@ -14,8 +10,10 @@ namespace KingSurvivalRefactored
     {
         private const char EmptyCell = ' ';
         private IWriter outputWriter;
+
         private int distanceBetweenCellsX;
         private int distanceBetweenCellsY;
+
         private int consoleInitialPositionX;
         private int consoleInitialPositionY;
 
@@ -27,27 +25,29 @@ namespace KingSurvivalRefactored
             this.ConsoleInitialPositionX = consoleInitialPositionX;
             this.ConsoleInitialPositionY = consoleInitialPositionY;
             this.outputWriter = new ConsoleWriter();
-
         }
+
         public ConsoleRenderer(int distanceBetweenCellsX, int distanceBetweenCellsY,
             int consoleInitialPositionX, int consoleInitialPositionY,IWriter outputWriter):
-            this(distanceBetweenCellsX,distanceBetweenCellsY,
-            consoleInitialPositionX,consoleInitialPositionY)
+            this(distanceBetweenCellsX,distanceBetweenCellsY, consoleInitialPositionX,consoleInitialPositionY)
         {
             this.outputWriter = outputWriter;
         }
+
         public int DistanceBetweenCellsX
         {
             get
             {
                 return this.distanceBetweenCellsX;
             }
+
             private set
             {
                 if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException("Distance betwen cells cannot be negative");
                 }
+
                 this.distanceBetweenCellsX = value;
             }
         }
@@ -58,12 +58,14 @@ namespace KingSurvivalRefactored
             {
                 return this.distanceBetweenCellsY;
             }
+
             private set
             {
                 if (value < 0)
                 {
                     throw new ArgumentOutOfRangeException("Distance betwen cells cannot be negative");
                 }
+
                 this.distanceBetweenCellsY = value;
             }
         }
@@ -74,30 +76,37 @@ namespace KingSurvivalRefactored
             {
                 return this.consoleInitialPositionX;
             }
+
             private set
             {
                 if (value < 0 || value > Console.LargestWindowWidth)
                 {
                     throw new ArgumentOutOfRangeException("ConsoleInitialPositionX cannot be less than 0 or more than " + Console.LargestWindowWidth);
                 }
+
                 this.consoleInitialPositionX = value;
             }
         }
+
         public int ConsoleInitialPositionY
         {
             get
             {
                 return this.consoleInitialPositionY;
             }
+
             private set
             {
                 if (value < 0 || value > Console.LargestWindowHeight)
                 {
-                    throw new ArgumentOutOfRangeException("ConsoleInitialPositionX cannot be less than 0 or more than " + Console.LargestWindowHeight);
+                    throw new ArgumentOutOfRangeException("ConsoleInitialPositionX cannot be less than 0 or more than " +
+                        Console.LargestWindowHeight);
                 }
+
                 this.consoleInitialPositionY = value;
             }
         }
+
         /// <summary>
         /// Draws the frame of the table to the console and then draws each cell.
         /// </summary>
@@ -119,9 +128,11 @@ namespace KingSurvivalRefactored
                 {
                     throw new ArgumentNullException("The writer cat be set to null.");
                 }
+
                 outputWriter = value;
             }
         }
+
         /// <summary>
         /// Draws the cell to the console using the coordinates, the color and the value of the cell
         /// </summary>
@@ -130,7 +141,9 @@ namespace KingSurvivalRefactored
         {
             int drawPositionX = CalculateAbsolutePositionX(cellToDraw);
             int drawPositionY = CalculateAbsolutePositionY(cellToDraw);
+
             outputWriter.SetCursorPosition(drawPositionX, drawPositionY);
+
             if (cellToDraw.IsFree)
             {
                 outputWriter.ForegroundColor = cellToDraw.Color;
@@ -139,6 +152,7 @@ namespace KingSurvivalRefactored
             {
                 outputWriter.ForegroundColor = ConsoleColor.Black;
             }
+
             outputWriter.BackgroundColor = cellToDraw.Color;
             outputWriter.Write(cellToDraw.Value);
             outputWriter.ResetColor();

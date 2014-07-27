@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
-    public class FigureFactory:IFigureFactory
+    using System;
+    using KingSurvivalRefactored.Interfaces;
+
+    public class FigureFactory : IFigureFactory
     {
+        private const int MaxNumberOfPawns = 10;
+        private const int MinNumberOfPawns = 2;
+
         private IFigure[] allFigures;
         private int pawnCount; // The number of the pawns can be calculated automaticaly based on the size of the Board. But for now it is passed as parameter.
         private Table table;
-        
 
-        public FigureFactory(Table table, int pawnCount) {
+
+        public FigureFactory(Table table, int pawnCount)
+        {
             this.Table = table;
             this.PawnCount = pawnCount;
             this.AllFigures = new IFigure[this.PawnCount + 1];
@@ -47,28 +47,30 @@ namespace KingSurvivalRefactored
             get { return this.pawnCount; }
             set
             {
-                if (value < 2 || value > 10)
+                if (value < MinNumberOfPawns || value > MaxNumberOfPawns)
                 {
                     throw new ArgumentOutOfRangeException("The number of pawns must be between 2 and 10");
                 }
+
                 this.pawnCount = value;
             }
         }
 
         private Table Table
         {
-            set 
+            set
             {
                 this.table = value;
             }
         }
 
-        private IFigure[] AllFigures 
+        private IFigure[] AllFigures
         {
-            set 
+            set
             {
                 this.allFigures = value;
             }
+
             get
             {
                 return this.allFigures;

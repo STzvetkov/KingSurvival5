@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored.tests
+﻿namespace KingSurvivalRefactored.Tests
 {
+    using System;
+    using System.Text;
+    using KingSurvivalRefactored.Interfaces;
+
     class TestWriter : IWriter
     {
         public TestWriter()

@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+    using System.Linq;
+    using KingSurvivalRefactored.Interfaces;
+
     public abstract class Figure : IFigure
     {
         private ICell containingCell;
         private char drawingRepresentation;
         // TODO: fix the valid symbols
-        private char[] VALID_SYMBOLS = {'K', 'A', 'B', 'C', 'D'};
+        private char[] VALID_SYMBOLS = { 'K', 'A', 'B', 'C', 'D' };
 
         public Figure(ICell containingCell, char drawingRepresentation)
         {

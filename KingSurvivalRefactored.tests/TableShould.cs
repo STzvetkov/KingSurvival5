@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
-
-namespace KingSurvivalRefactored.tests
+﻿namespace KingSurvivalRefactored.Tests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class TableShould
     {
@@ -14,10 +13,13 @@ namespace KingSurvivalRefactored.tests
              
             FieldCellFactory testFactory = new FieldCellFactory(8, 8, '&', ConsoleColor.Blue, ConsoleColor.Red);
             Table testTable = new Table(testFactory, new Frame("test.txt"));
+
             bool testISValid=true;
             bool isCurrentOdd = true;
+
             string expectedCell="";
             string givenCell = "";
+
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -29,6 +31,7 @@ namespace KingSurvivalRefactored.tests
                         + testTable.Cells[j, i].Row + " "
                         + testTable.Cells[j, i].Value + " "
                         + testTable.Cells[j, i].Color;
+
                     if (expectedCell != givenCell)
                     {
                         testISValid = false;
