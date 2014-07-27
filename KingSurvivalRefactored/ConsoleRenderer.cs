@@ -10,7 +10,7 @@ namespace KingSurvivalRefactored
     /// <summary>
     /// A class used to perform the drawing on the console
     /// </summary>
-    public class ConsoleRenderer //
+    public class ConsoleRenderer:IRenderer
     {
         private const char EmptyCell = ' ';
         private IWriter outputWriter;
@@ -104,10 +104,10 @@ namespace KingSurvivalRefactored
         /// <param name="tableToDraw">The table to be drawn</param>
         public void DrawTable(ITable tableToDraw)
         {
-            Console.WriteLine(tableToDraw.Frame.Image);
-            foreach (var cell in tableToDraw as Table)
+            outputWriter.WriteLine(tableToDraw.Frame.Image);
+            foreach (ICell cell in tableToDraw)
             {
-                DrawCell(cell as FieldCell);
+                DrawCell(cell as ICell);
             }
         }
 
