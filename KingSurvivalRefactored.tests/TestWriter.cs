@@ -4,7 +4,7 @@
     using System.Text;
     using KingSurvivalRefactored.Interfaces;
 
-    class TestWriter : IWriter
+    public class TestWriter : IWriter
     {
         public TestWriter()
         {

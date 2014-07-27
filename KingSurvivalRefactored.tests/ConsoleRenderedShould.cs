@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored.tests
+namespace KingSurvivalRefactored.Tests
 {
     [TestClass]
     public class ConsoleRenderedShould
