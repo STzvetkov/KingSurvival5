@@ -60,7 +60,7 @@
     <Compile Include="Interfaces\IWriter.cs" />
     <Compile Include="King.cs" />
     <Compile Include="Pawn.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="KingSurvival.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table.cs" />
     <Compile Include="TableEnumerator.cs" />

@@ -64,14 +64,28 @@ namespace KingSurvivalRefactored.Tests
             mockedFrame.Setup( r=> r.Image).Returns(testImage);
             mockedTable.Setup(r => r.Frame).Returns(mockedFrame.Object);
             //mock the cells and enumerator
+            //first cell
             Mock<ICell> testCell = new Mock<ICell>();
             testCell.Setup(r => r.Col).Returns(10);
             testCell.Setup(r => r.Row).Returns(11);
             testCell.Setup(r => r.IsFree).Returns(true);
             testCell.Setup(r => r.Color).Returns(ConsoleColor.Black);
             testCell.Setup(r => r.Value).Returns('C');
+
+            
+            //second cell
+            Mock<ICell> testCell2 = new Mock<ICell>();
+            testCell2.Setup(r => r.Col).Returns(30);
+            testCell2.Setup(r => r.Row).Returns(31);
+            testCell2.Setup(r => r.IsFree).Returns(false);
+            testCell2.Setup(r => r.Color).Returns(ConsoleColor.White);
+            testCell2.Setup(r => r.Value).Returns('C');
+            //add the cells to list in order to mock enumeration
+
             IList<ICell> testCells= new List<ICell>();
             testCells.Add(testCell.Object);
+            testCells.Add(testCell2.Object);
+
             mockedTable.Setup(r => r.GetEnumerator()).Returns(() => testCells.GetEnumerator());  
             //Initialize the test writer
             TestWriter testWriter =   new TestWriter();
@@ -90,8 +104,13 @@ namespace KingSurvivalRefactored.Tests
             Assert.IsTrue(result.Contains(cellTextRepresentation),
                 "The test cell wasn't printed or was printed at the wrong place or with the wrong color\n The renderer printed:\n"
                 + result + "\nIt was expected to contain " + cellTextRepresentation);
-       
-
+            //correctly draw cell with a value;
+            cellTextRepresentation = "Printed 'C' at x:" + (CONSOLE_INITIAL_POSITION_X + 30 * (DISTANCE_BETWEEN_CELLS_X + 1))
+                + " y:" + (CONSOLE_INITIAL_POSITION_Y + 31 * (DISTANCE_BETWEEN_CELLS_Y + 1))
+                + " colors bg: White fg: Black";
+            Assert.IsTrue(result.Contains(cellTextRepresentation),
+               "The test cell wasn't printed or was printed at the wrong place or with the wrong color\n The renderer printed:\n"
+               + result + "\nIt was expected to contain " + cellTextRepresentation);
         }
         [TestMethod]
         public void ChangeImagePositionCorrectly()
@@ -186,5 +205,15 @@ namespace KingSurvivalRefactored.Tests
         {
             new ConsoleRenderer(1,-1,1,1);
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "Console renderer initialized with  horizontal initial position outside the maximum width")]
+        public void ThrowExceptionWhenInitializingWithHorizontalPositionOutsideTheMaximumWidth()
+        {
+            TestWriter testWriter = new TestWriter();
+            testWriter.LargestWindowWidth = 20;
+            new ConsoleRenderer(1, 1, 40, 1,testWriter);
+        }
+        
     }
 }
