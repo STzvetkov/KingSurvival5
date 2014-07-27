@@ -186,5 +186,15 @@ namespace KingSurvivalRefactored.Tests
         {
             new ConsoleRenderer(1,-1,1,1);
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "Console renderer initialized with  horizontal initial position outside the maximum width")]
+        public void ThrowExceptionWhenInitializingWithHorizontalPositionOutsideTheMaximumWidth()
+        {
+            TestWriter testWriter = new TestWriter();
+            testWriter.LargestWindowWidth = 20;
+            new ConsoleRenderer(1, 1, 40, 1,testWriter);
+        }
+        
     }
 }
