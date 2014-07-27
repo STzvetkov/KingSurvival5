@@ -9,7 +9,7 @@ using KingSurvivalRefactored.Interfaces;
 
 namespace KingSurvivalRefactored
 {
-    public class Table : IEnumerable, ITable // Iterator pattern - foreach on Table instance iterates over the table cells
+    public class Table :  ITable // Iterator pattern - foreach on Table instance iterates over the table cells
     {
         private ICell[,] cells;
         private IFrame frame;
