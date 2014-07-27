@@ -22,6 +22,7 @@
                 {
                     instance = new Checker();
                 }
+
                 return instance;
             }
         }
@@ -94,7 +95,7 @@
             bool isUpperRightCellFree;
             bool isLowerLeftCellFree;
             bool isLowerRightCellFree;
-            
+
             if (kingRow > 0 && kingCol > 0)
             {
                 isUpperLeftCellFree = table.Cells[kingRow - 1, kingCol - 1].IsFree;
@@ -122,7 +123,7 @@
                 isLowerLeftCellFree = false;
             }
 
-            if (kingRow < tableHeight -1 && kingCol < tableWidth - 1)
+            if (kingRow < tableHeight - 1 && kingCol < tableWidth - 1)
             {
                 isLowerRightCellFree = table.Cells[kingRow + 1, kingCol + 1].IsFree;
             }
@@ -130,7 +131,7 @@
             {
                 isLowerRightCellFree = false;
             }
-            
+
             if (isUpperLeftCellFree || isUpperRightCellFree || isLowerLeftCellFree || isLowerRightCellFree)
             {
                 return false;
@@ -157,6 +158,7 @@
         public bool IsValidFigureRequested(int counter, string input, IFigure[] figures)
         {
             input = input.ToUpper();
+
             // Check if it is King's or Pawn's turn with the counter(odd or even) and check if the first letter of the input is correct
             if (counter % 2 != 0)
             {
@@ -183,13 +185,14 @@
             return false;
         }
 
-        public bool IsRequestedPositionInsideTable(int newX, int newY, ITable table) 
+        public bool IsRequestedPositionInsideTable(int newX, int newY, ITable table)
         {
-            if (newY >=0 && newY < table.Cells.GetLength(0) && 
+            if (newY >= 0 && newY < table.Cells.GetLength(0) &&
                 newX >= 0 && newX < table.Cells.GetLength(1))
             {
                 return true;
             }
+
             return false;
         }
     }

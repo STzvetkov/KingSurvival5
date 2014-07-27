@@ -2,8 +2,8 @@
 {
     using System;
     using KingSurvivalRefactored.Interfaces;
-    
-    class ConsoleWriter:IWriter
+
+    public class ConsoleWriter : IWriter
     {
         public ConsoleColor BackgroundColor
         {
@@ -18,6 +18,14 @@
             set
             {
                 Console.ForegroundColor = value;
+            }
+        }
+
+        public int LargestWindowWidth
+        {
+            get
+            {
+                return Console.LargestWindowHeight;
             }
         }
 
@@ -49,13 +57,6 @@
         public void ResetColor()
         {
             Console.ResetColor();
-        }
-        public int LargestWindowWidth 
-        {
-            get
-            {
-                return Console.LargestWindowHeight;
-            }
         }
     }
 }

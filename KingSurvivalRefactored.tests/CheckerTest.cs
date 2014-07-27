@@ -16,6 +16,22 @@
         }
 
         [TestMethod]
+        public void IsValidMoveForPawnShouldReturnTrueForCorrectData()
+        {
+            IFigure pawn = new Pawn(new FieldCell(3,3,'A',ConsoleColor.Black),'A');
+            bool isValid = Checker.Instance.IsValidMove(pawn, "ADL");
+            Assert.IsTrue(isValid, "ADL should be valid move for pawn");
+        }
+
+        [TestMethod]
+        public void IsValidMoveForPawnShouldReturnFalseForIncorrectData()
+        {
+            IFigure pawn = new Pawn(new FieldCell(3, 3, 'A', ConsoleColor.Black), 'A');
+            bool isValid = Checker.Instance.IsValidMove(pawn, "ARL");
+            Assert.IsFalse(isValid, "ARL should not be valid move for pawn");
+        }
+
+        [TestMethod]
         public void IsValidMoveForKingShouldReturnFalseForIvalidDirection()
         {
             IFigure king = this.InitKing(2, 3);

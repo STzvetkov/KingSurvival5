@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+    using System.Linq;
+    using KingSurvivalRefactored.Interfaces;
+
     public class Engine
     {
         private const int DistanceBetweenCellsX = 1;
@@ -35,9 +35,9 @@ namespace KingSurvivalRefactored
 
         public void Start()
         {
-            EnterBoardSize();
-            this.table = CreateTable();
-            this.figures = CreateFigures(this.table, pawnsTotalCount);
+            this.EnterBoardSize();
+            this.table = this.CreateTable();
+            this.figures = this.CreateFigures(this.table, this.pawnsTotalCount);
             this.rendrer.DrawTable(this.table);
             bool validInput = false;
 
@@ -45,53 +45,52 @@ namespace KingSurvivalRefactored
             {
                 if (validInput)
                 {
-                    ClearConsoleLines(this.table.Frame.Height + 1, 3);
+                    this.ClearConsoleLines(this.table.Frame.Height + 1, 3);
                 }
                 else
                 {
-                    ClearConsoleLines(this.table.Frame.Height + 2, 3);
+                    this.ClearConsoleLines(this.table.Frame.Height + 2, 3);
                 }
 
-                string input = ReadMoveInput(this.moveCounter);
+                string input = this.ReadMoveInput(this.moveCounter);
                 Console.SetCursorPosition(0, this.table.Frame.Height + 1);
 
                 if (!(Checker.Instance.IsValidFigureRequested(this.moveCounter, input, this.figures)))
                 {
                     // Invalid Figure(first letter). Ask the user for new input
-                    ClearConsoleLines(Console.CursorTop, 1);
+                    this.ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("Invalid Figure (the first letter).");
                     validInput = false;
                     continue;
                 }
 
-                currentFigure = ExtractRequestedFigure(input, this.figures);
-                if (!(Checker.Instance.IsValidMove(currentFigure, input)))
+                this.currentFigure = this.ExtractRequestedFigure(input, this.figures);
+                if (!(Checker.Instance.IsValidMove(this.currentFigure, input)))
                 {
                     // Invalid Move. Ask the user for new input
-                    ClearConsoleLines(Console.CursorTop, 1);
+                    this.ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("Invalid move.");
                     validInput = false;
                     continue;
                 }
 
-                int requestedCoordinateX = ExtractRequestedCoordinateX(input, currentFigure);
-                int requestedCoordinateY = ExtractRequestedCoordinateY(input, currentFigure);
+                int requestedCoordinateX = this.ExtractRequestedCoordinateX(input, this.currentFigure);
+                int requestedCoordinateY = this.ExtractRequestedCoordinateY(input, this.currentFigure);
                 ICell requestedCell;
 
-                if (!(Checker.Instance.IsRequestedPositionInsideTable(requestedCoordinateX, requestedCoordinateY, table)))
+                if (!(Checker.Instance.IsRequestedPositionInsideTable(requestedCoordinateX, requestedCoordinateY, this.table)))
                 {
-                    ClearConsoleLines(Console.CursorTop, 1);
+                    this.ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("There is no cell in the chosen direction.");
                     validInput = false;
                     continue;
                 }
-
                 else
                 {
-                    requestedCell = table.Cells[requestedCoordinateY, requestedCoordinateX];
+                    requestedCell = this.table.Cells[requestedCoordinateY, requestedCoordinateX];
                     if (!requestedCell.IsFree)
                     {
-                        ClearConsoleLines(Console.CursorTop, 1);
+                        this.ClearConsoleLines(Console.CursorTop, 1);
                         Console.WriteLine("The chosen cell is not free.");
                         validInput = false;
                         continue;
@@ -99,7 +98,7 @@ namespace KingSurvivalRefactored
                 }
 
                 validInput = true;
-                MoveFigure(currentFigure, requestedCell);
+                this.MoveFigure(currentFigure, requestedCell);
                 Console.SetCursorPosition(0, this.table.Frame.Height + 1);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
@@ -139,7 +138,7 @@ namespace KingSurvivalRefactored
                 {
                     Console.WriteLine("The input is incorrect: ");
                 }
-                else 
+                else
                 {
                     validSize = this.boardSize >= 8 || this.boardSize <= 20;
                     if (!validSize)
@@ -148,6 +147,7 @@ namespace KingSurvivalRefactored
                     }
                 }
             } while (!validSize);
+
             this.pawnsTotalCount = this.boardSize / 2;
             ClearConsoleLines(0, Console.WindowHeight);
         }
@@ -164,12 +164,12 @@ namespace KingSurvivalRefactored
             {
                 throw new ArgumentNullException("Figures cannot be null or with 0 length");
             }
+
             // Get the first letter of the input and find the figure with the same drawingRepresentation from the figures array
             char figureDrawingRepresentation = input[0];
 
             // Figure requested = figures[0];
             IFigure requested = null;
-
 
             for (int i = 0; i < figures.Length; i++)
             {
@@ -189,6 +189,7 @@ namespace KingSurvivalRefactored
         }
 
         // TODO: To be moved to a Factory class
+
         /// <summary>
         /// Creates an instance of Frame class and an array of FieldCell class instances.
         /// Using them as parameters creates a Table instance.

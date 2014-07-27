@@ -5,6 +5,7 @@
     public class King : Figure
     {
         private readonly string[] DirectionsAvailable = { "DL", "DR", "UL", "UR" };
+
         public King(ICell position, char drawingRepresentation) : 
             base(position, drawingRepresentation)
         {
