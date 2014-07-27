@@ -15,20 +15,21 @@
             Table testTable = new Table(testFactory, new Frame("test.txt"));
 
             bool testISValid=true;
-            bool isCurrentOdd = true;
+            bool isCurrentOdd;
 
             string expectedCell="";
             string givenCell = "";
-
+           
             for (int i = 0; i < 8; i++)
             {
+                isCurrentOdd = (i%2 == 0);
                 for (int j = 0; j < 8; j++)
                 {
                     expectedCell = j + " " + i + " & " + 
-                        (isCurrentOdd?ConsoleColor.Red:ConsoleColor.Blue);
+                        (isCurrentOdd? ConsoleColor.Red : ConsoleColor.Blue);
                     isCurrentOdd = !isCurrentOdd;
-                    givenCell = testTable.Cells[j,i].Col + " "
-                        + testTable.Cells[j, i].Row + " "
+                    givenCell = testTable.Cells[j,i].Row + " "
+                        + testTable.Cells[j, i].Col + " "
                         + testTable.Cells[j, i].Value + " "
                         + testTable.Cells[j, i].Color;
 
@@ -38,6 +39,11 @@
                         break;
                     }
                 }
+                if (!testISValid)
+                {
+                    break;
+                }
+                
             }
                 Console.WriteLine( );
                 Assert.IsTrue(testISValid, "One of the cells wasn't initialized or returned properly.\nExpected:"
