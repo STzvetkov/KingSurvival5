@@ -10,10 +10,10 @@
 
         private IFigure[] allFigures;
         private int pawnCount; // The number of the pawns can be calculated automaticaly based on the size of the Board. But for now it is passed as parameter.
-        private Table table;
+        private ITable table;
 
 
-        public FigureFactory(Table table, int pawnCount)
+        public FigureFactory(ITable table, int pawnCount)
         {
             this.Table = table;
             this.PawnCount = pawnCount;
@@ -56,7 +56,7 @@
             }
         }
 
-        private Table Table
+        private ITable Table
         {
             set
             {
