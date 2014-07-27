@@ -20,5 +20,6 @@
 
         void ResetColor();
 
+        int LargestWindowWidth { get; }
     }
 }

@@ -50,5 +50,12 @@
         {
             Console.ResetColor();
         }
+        public int LargestWindowWidth 
+        {
+            get
+            {
+                return Console.LargestWindowHeight;
+            }
+        }
     }
 }

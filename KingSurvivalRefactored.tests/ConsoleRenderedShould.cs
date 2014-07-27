@@ -155,7 +155,8 @@ namespace KingSurvivalRefactored.Tests
             "Console renderer initialized with a null writer.")]
         public void ThrowExceptionWhenInitializingWithNullWriter()
         {
-            CreateConsoleRenderer(null);
+            new ConsoleRenderer(1, 1,
+                1, 1, null as IWriter);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException),

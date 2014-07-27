@@ -12,6 +12,7 @@
             positionX = 0;
             positionY = 0;
             result = new StringBuilder();
+            LargestWindowWidth = 150;
         }
         public string GetResult()
         {
@@ -58,6 +59,12 @@
         {
             backGroundColor = "black";
             foregroundColor = "white";
+        }
+
+        public int LargestWindowWidth
+        {
+            get;
+            set;
         }
 
         private string backGroundColor;

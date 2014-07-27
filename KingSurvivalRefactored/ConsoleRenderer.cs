@@ -6,7 +6,7 @@
     /// <summary>
     /// A class used to perform the drawing on the console
     /// </summary>
-    public class ConsoleRenderer:IRenderer
+    public class ConsoleRenderer : IRenderer
     {
         private const char EmptyCell = ' ';
         private IWriter outputWriter;
@@ -20,20 +20,21 @@
         public ConsoleRenderer(int distanceBetweenCellsX, int distanceBetweenCellsY,
             int consoleInitialPositionX, int consoleInitialPositionY)
         {
-            this.DistanceBetweenCellsX = distanceBetweenCellsX;
-            this.DistanceBetweenCellsY = distanceBetweenCellsY;
-            this.ConsoleInitialPositionX = consoleInitialPositionX;
-            this.ConsoleInitialPositionY = consoleInitialPositionY;
-            this.outputWriter = new ConsoleWriter();
+            this.OutputWriter = new ConsoleWriter();
+            initializeDistanceValues(distanceBetweenCellsX, distanceBetweenCellsY,
+             consoleInitialPositionX, consoleInitialPositionY);
+
         }
 
         public ConsoleRenderer(int distanceBetweenCellsX, int distanceBetweenCellsY,
-            int consoleInitialPositionX, int consoleInitialPositionY,IWriter outputWriter):
-            this(distanceBetweenCellsX,distanceBetweenCellsY, consoleInitialPositionX,consoleInitialPositionY)
+            int consoleInitialPositionX, int consoleInitialPositionY, IWriter outputWriter)
         {
             this.OutputWriter = outputWriter;
+            initializeDistanceValues(distanceBetweenCellsX, distanceBetweenCellsY,
+             consoleInitialPositionX, consoleInitialPositionY);
         }
 
+        
         public int DistanceBetweenCellsX
         {
             get
@@ -79,7 +80,7 @@
 
             private set
             {
-                if (value < 0 || value > Console.LargestWindowWidth)
+                if (value < 0 || value > outputWriter.LargestWindowWidth)
                 {
                     throw new ArgumentOutOfRangeException("ConsoleInitialPositionX cannot be less than 0 or more than " + Console.LargestWindowWidth);
                 }
@@ -191,6 +192,14 @@
             outputWriter.ForegroundColor = ConsoleColor.Black;
             outputWriter.Write(figureToMove.DrawingRepresentation);
             outputWriter.ResetColor();
+        }
+        private void initializeDistanceValues(int distanceBetweenCellsX, int distanceBetweenCellsY,
+            int consoleInitialPositionX, int consoleInitialPositionY)
+        {
+            this.DistanceBetweenCellsX = distanceBetweenCellsX;
+            this.DistanceBetweenCellsY = distanceBetweenCellsY;
+            this.ConsoleInitialPositionX = consoleInitialPositionX;
+            this.ConsoleInitialPositionY = consoleInitialPositionY;
         }
     }
 }
