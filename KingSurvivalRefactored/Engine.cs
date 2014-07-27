@@ -154,6 +154,10 @@ namespace KingSurvivalRefactored
         /// <returns>The figure with the requested drawin representation</returns>
         private IFigure ExtractRequestedFigure(string input, IFigure[] figures)
         {
+            if (figures == null || figures.Length == 0)
+            {
+                throw new ArgumentNullException("Figures cannot be null or with 0 length");
+            }
             // Get the first letter of the input and find the figure with the same drawingRepresentation from the figures array
             char figureDrawingRepresentation = input[0];
 
