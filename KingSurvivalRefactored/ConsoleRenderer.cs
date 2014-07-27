@@ -31,7 +31,7 @@
             int consoleInitialPositionX, int consoleInitialPositionY,IWriter outputWriter):
             this(distanceBetweenCellsX,distanceBetweenCellsY, consoleInitialPositionX,consoleInitialPositionY)
         {
-            this.outputWriter = outputWriter;
+            this.OutputWriter = outputWriter;
         }
 
         public int DistanceBetweenCellsX

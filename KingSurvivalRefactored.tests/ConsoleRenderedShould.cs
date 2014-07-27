@@ -96,6 +96,7 @@ namespace KingSurvivalRefactored.Tests
         [TestMethod]
         public void ChangeImagePositionCorrectly()
         {
+            //mock the old cell
             int oldCellX=10;
             int oldCellY=10;
             char oldCellSymbol='C';
@@ -106,6 +107,7 @@ namespace KingSurvivalRefactored.Tests
             oldCell.Setup(r => r.Color).Returns(ConsoleColor.Black);
             oldCell.Setup(r => r.Value).Returns(oldCellSymbol);
 
+            //mock the new cell
             int newCellX = 12;
             int newCellY = 12;
             char newCellSymbol = 'N';
@@ -115,13 +117,17 @@ namespace KingSurvivalRefactored.Tests
             newCell.Setup(r => r.IsFree).Returns(true);
             newCell.Setup(r => r.Color).Returns(ConsoleColor.Black);
             newCell.Setup(r => r.Value).Returns(newCellSymbol);
+            
+            //mock the figure
             char figureRepresentation = 'F';
             Mock<IFigure> mockedFigure = new Mock<IFigure>();
             mockedFigure.Setup(r => r.ContainingCell).Returns(oldCell.Object);
             mockedFigure.Setup(r => r.DrawingRepresentation).Returns(figureRepresentation);
+            
             //Create the renderer
             TestWriter testWriter = new TestWriter();
             IRenderer testedRenderer= CreateConsoleRenderer(testWriter);
+            
             //call the function 
             testedRenderer.ChangeImagePosition(mockedFigure.Object,newCell.Object);
             string result = testWriter.GetResult();
@@ -143,6 +149,41 @@ namespace KingSurvivalRefactored.Tests
                 "The new cell and figure wasn't cleared as expected\n Expected occurrence of :\n"
                 + expectedFigureRepresentation + "\n Actual output : \n" + result);
 
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException),
+            "Console renderer initialized with a null writer.")]
+        public void ThrowExceptionWhenInitializingWithNullWriter()
+        {
+            CreateConsoleRenderer(null);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "Console renderer initialized with negative horizontal initial position")]
+        public void ThrowExceptionWhenInitializingWithNegativeVerticalPosition()
+        {
+            new ConsoleRenderer(1,1,-1,1);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "Console renderer initialized with negative vertical initial position")]
+        public void ThrowExceptionWhenInitializingWithNegativeHorisontalPosition()
+        {
+            new ConsoleRenderer(1,1,1,-1);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "Console renderer initialized with negative vertical initial margins")]
+        public void ThrowExceptionWhenInitializingWithNegativeHorisontalMargins()
+        {
+            new ConsoleRenderer(-1,1,1,1);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException),
+            "Console renderer initialized with negative horizontal initial margins")]
+        public void ThrowExceptionWhenInitializingWithNegativeVerticalMargins()
+        {
+            new ConsoleRenderer(1,-1,1,1);
         }
     }
 }
