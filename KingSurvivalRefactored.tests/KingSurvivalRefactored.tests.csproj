@@ -60,7 +60,7 @@
     <Compile Include="ConsoleRenderedShould.cs" />
     <Compile Include="TestWriter.cs" />
     <Compile Include="FrameTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="FigureFactoryShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KingSurvivalRefactored\KingSurvivalRefactored.csproj">

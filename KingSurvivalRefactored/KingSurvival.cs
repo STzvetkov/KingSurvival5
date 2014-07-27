@@ -1,6 +1,6 @@
 ﻿namespace KingSurvivalRefactored
 {
-    class Program
+    class KingSurvival
     {
         static void Main(string[] args)
         {
