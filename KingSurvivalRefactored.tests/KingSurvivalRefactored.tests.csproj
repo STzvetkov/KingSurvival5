@@ -60,6 +60,7 @@
     <Compile Include="ConsoleRenderedShould.cs" />
     <Compile Include="TestWriter.cs" />
     <Compile Include="FrameTest.cs" />
+    <Compile Include="TableEnumeratorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KingSurvivalRefactored\KingSurvivalRefactored.csproj">
