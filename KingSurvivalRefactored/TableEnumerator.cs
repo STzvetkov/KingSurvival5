@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KingSurvivalRefactored.Interfaces;
-
-namespace KingSurvivalRefactored
+﻿namespace KingSurvivalRefactored
 {
+    using System;
+    using System.Collections;
+    using KingSurvivalRefactored.Interfaces;
+
     public class TableEnumerator : IEnumerator
     {
         //If we need a performance boost, we can make iterationTarget a simple array of cells.
@@ -18,7 +14,7 @@ namespace KingSurvivalRefactored
 
         private ICell lastCell;
 
-        //will be needed to trace the state of the enumerator
+        // will be needed to trace the state of the enumerator
         public TableEnumerator(Table table)
         {
             if (table == null)
@@ -32,6 +28,14 @@ namespace KingSurvivalRefactored
 
             this.iterationTarget = table;
             this.Reset();
+        }
+
+        public object Current
+        {
+            get
+            {
+                return lastCell;
+            }
         }
 
         public bool MoveNext()
@@ -56,14 +60,6 @@ namespace KingSurvivalRefactored
             this.currentX = -1;
             this.currentY = 0;
             this.lastCell = this.iterationTarget.Cells[0, 0];
-        }
-
-        public object Current
-        {
-            get
-            {
-                return lastCell;
-            }
         }
     }
 }

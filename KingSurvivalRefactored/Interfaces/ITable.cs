@@ -2,7 +2,7 @@
 {
     using System.Collections;
 
-    public interface ITable: IEnumerable
+    public interface ITable : IEnumerable
     {
         ICell[,] Cells { get; }
 

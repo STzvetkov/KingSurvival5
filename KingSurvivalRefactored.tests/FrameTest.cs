@@ -32,7 +32,7 @@ using System.IO;
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void PassingTooLagreFileShouldThrowException()
         {
-            Frame frame = new Frame("test-incorrect1.txt");
+            Frame frame = new Frame("../../test-incorrect1.txt");
         }
 
         [TestMethod]

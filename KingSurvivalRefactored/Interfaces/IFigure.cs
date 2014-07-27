@@ -2,7 +2,7 @@
 {
     public interface IFigure
     {
-        ICell ContainingCell { get; set;}
+        ICell ContainingCell { get; set; }
 
         char DrawingRepresentation { get; set; }
 

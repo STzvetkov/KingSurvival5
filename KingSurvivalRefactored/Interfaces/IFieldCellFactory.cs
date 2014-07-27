@@ -2,8 +2,6 @@
 {
     public interface IFieldCellFactory
     {
-        FieldCell GenerateNextCell();
-
         int RowCount
         {
             get;
@@ -13,5 +11,7 @@
         {
             get;
         }
+        
+        FieldCell GenerateNextCell();
     }
 }

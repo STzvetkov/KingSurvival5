@@ -8,6 +8,7 @@
     {
         private ICell containingCell;
         private char drawingRepresentation;
+
         // TODO: fix the valid symbols
         private char[] VALID_SYMBOLS = { 'K', 'A', 'B', 'C', 'D' };
 
@@ -27,6 +28,7 @@
             {
                 return this.containingCell;
             }
+
             set
             {
                 this.containingCell = value;
@@ -42,6 +44,7 @@
             {
                 return this.drawingRepresentation;
             }
+
             set
             {
                 if (VALID_SYMBOLS.Contains(value))

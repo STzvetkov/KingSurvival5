@@ -98,25 +98,25 @@
                 }
 
                 validInput = true;
-                this.MoveFigure(currentFigure, requestedCell);
+                this.MoveFigure(this.currentFigure, requestedCell);
                 Console.SetCursorPosition(0, this.table.Frame.Height + 1);
                 if (Checker.Instance.HasKingWon(this.figures[0] as King))
                 {
                     // king won message
-                    ClearConsoleLines(Console.CursorTop, 1);
+                    this.ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("King wins!");
                     break;
                 }
 
                 if (Checker.Instance.HasKingLost(this.figures[0] as King, this.table))
                 {
-                    //king lost message 
-                    ClearConsoleLines(Console.CursorTop, 1);
+                    // king lost message 
+                    this.ClearConsoleLines(Console.CursorTop, 1);
                     Console.WriteLine("King lost!");
                     break;
                 }
 
-                moveCounter++;
+                this.moveCounter++;
             }
         }
 
@@ -149,7 +149,7 @@
             } while (!validSize);
 
             this.pawnsTotalCount = this.boardSize / 2;
-            ClearConsoleLines(0, Console.WindowHeight);
+            this.ClearConsoleLines(0, Console.WindowHeight);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@
         /// <returns>The table created</returns>
         private Table CreateTable()
         {
-            FieldCellFactory cellCreator = new FieldCellFactory(boardSize, boardSize,
+            FieldCellFactory cellCreator = new FieldCellFactory(this.boardSize, this.boardSize,
                 FieldRepresentation, FirstFieldColor, SecondFieldColor);
             return new Table(cellCreator, new Frame(FrameSourceFile));
         }

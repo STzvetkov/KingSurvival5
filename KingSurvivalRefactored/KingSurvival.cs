@@ -1,8 +1,8 @@
 ﻿namespace KingSurvivalRefactored
 {
-    class KingSurvival
+    public class KingSurvival
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Engine gameEngine = new Engine();
             gameEngine.Start();

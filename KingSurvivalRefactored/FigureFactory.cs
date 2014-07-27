@@ -22,9 +22,9 @@
 
         public IFigure[] GenerateFigures()
         {
-            int kingInitRow = table.Cells.GetLength(0) - 1; // This gets the end of the playfield
-            int kingInitCol = table.Cells.GetLength(1) / 2 - 1; // This gets the center of the columns
-            ICell kingInitialPosition = table.Cells[kingInitRow, kingInitCol];
+            int kingInitRow = this.table.Cells.GetLength(0) - 1; // This gets the end of the playfield
+            int kingInitCol = this.table.Cells.GetLength(1) / 2 - 1; // This gets the center of the columns
+            ICell kingInitialPosition = this.table.Cells[kingInitRow, kingInitCol];
 
             int firstLetter = 65;
 
@@ -66,15 +66,16 @@
 
         private IFigure[] AllFigures
         {
+            get
+            {
+                return this.allFigures;
+            }
+
             set
             {
                 this.allFigures = value;
             }
 
-            get
-            {
-                return this.allFigures;
-            }
         }
     }
 }

@@ -4,6 +4,8 @@
 
     public interface IWriter
     {
+        int LargestWindowWidth { get; }
+
         ConsoleColor BackgroundColor { set; }
 
         ConsoleColor ForegroundColor { set; }
@@ -19,7 +21,5 @@
         void WriteLine(string input);
 
         void ResetColor();
-
-        int LargestWindowWidth { get; }
     }
 }
