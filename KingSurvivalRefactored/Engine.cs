@@ -146,7 +146,8 @@
                         Console.WriteLine("The entered number is not within the limits: ");
                     }
                 }
-            } while (!validSize);
+            } 
+            while (!validSize);
 
             this.pawnsTotalCount = this.boardSize / 2;
             this.ClearConsoleLines(0, Console.WindowHeight);

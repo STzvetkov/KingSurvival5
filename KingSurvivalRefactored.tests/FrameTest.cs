@@ -10,14 +10,14 @@ using System.IO;
         [TestMethod]
         public void CorrectlyInitializeTheFrameShouldReturnCorrectWidth()
         {
-            Frame frame = new Frame("test.txt");
+            Frame frame = new Frame("../../test.txt");
             Assert.AreEqual(16, frame.Width,"The width of the picture is not correct.");
         }
 
         [TestMethod]
         public void CorrectlyInitializeTheFrameShouldReturnCorrectHeight()
         {
-            Frame frame = new Frame("test.txt");
+            Frame frame = new Frame("../../test.txt");
             Assert.AreEqual(4, frame.Height, "The height of the picture is not correct.");
         }
 
@@ -25,7 +25,7 @@ using System.IO;
         [ExpectedException (typeof (FileNotFoundException))]
         public void PassingIncorrectFileShouldThrowException()
         {
-            Frame frame = new Frame("test-fake.txt");
+            Frame frame = new Frame("../../test-fake.txt");
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ using System.IO;
         [TestMethod]
         public void ThePropertyShouldReturnTheSamePicture()
         {
-            Frame frame = new Frame("test.txt");
+            Frame frame = new Frame("../../test.txt");
             Assert.AreEqual("This\nIs some text,\nMent to test the\nframe\n", frame.Image,"The string representing the picture is not correct.");
         }
     }

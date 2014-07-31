@@ -10,7 +10,7 @@
 
         public Table(IFieldCellFactory cellCreator, IFrame frame)
         {
-            InitializeCells(cellCreator);
+            this.InitializeCells(cellCreator);
             this.Frame = frame;
         }
 
@@ -47,7 +47,7 @@
         {
             get
             {
-                return frame;
+                return this.frame;
             }
 
             private set

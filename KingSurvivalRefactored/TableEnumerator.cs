@@ -6,7 +6,7 @@
 
     public class TableEnumerator : IEnumerator
     {
-        //If we need a performance boost, we can make iterationTarget a simple array of cells.
+        // If we need a performance boost, we can make iterationTarget a simple array of cells.
         private readonly Table iterationTarget;
 
         private int currentX;
@@ -34,18 +34,18 @@
         {
             get
             {
-                return lastCell;
+                return this.lastCell;
             }
         }
 
         public bool MoveNext()
         {
             this.currentX++;
-            if (this.currentX == iterationTarget.Cells.GetLength(0))
+            if (this.currentX == this.iterationTarget.Cells.GetLength(0))
             {
                 this.currentX = 0;
                 this.currentY++;
-                if (this.currentY == iterationTarget.Cells.GetLength(1))
+                if (this.currentY == this.iterationTarget.Cells.GetLength(1))
                 {
                     return false;
                 }

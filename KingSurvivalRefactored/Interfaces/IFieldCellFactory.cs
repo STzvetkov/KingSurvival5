@@ -2,16 +2,10 @@
 {
     public interface IFieldCellFactory
     {
-        int RowCount
-        {
-            get;
-        }
+        int RowCount { get; }
 
-        int ColCount
-        {
-            get;
-        }
-        
+        int ColCount { get; }
+
         FieldCell GenerateNextCell();
     }
 }

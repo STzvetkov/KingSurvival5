@@ -12,7 +12,7 @@
             string expectedFrameImage = "This\nIs some text,\nMent to test the\nframe\n";
              
             FieldCellFactory testFactory = new FieldCellFactory(8, 8, '&', ConsoleColor.Blue, ConsoleColor.Red);
-            Table testTable = new Table(testFactory, new Frame("test.txt"));
+            Table testTable = new Table(testFactory, new Frame("../../test.txt"));
 
             bool testISValid=true;
             bool isCurrentOdd;

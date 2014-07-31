@@ -31,7 +31,7 @@ namespace KingSurvivalRefactored.Tests
             int numberOfFigures = CreateTestFactory(4).GenerateFigures().Length;
             Assert.AreEqual(numberOfFigures, 5,
                 "We expected the factory to generate 4 figures it generated "
-                + numberOfFigures + "."); ;
+                + numberOfFigures + ".");
         }
     }
 }

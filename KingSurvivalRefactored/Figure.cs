@@ -10,7 +10,7 @@
         private char drawingRepresentation;
 
         // TODO: fix the valid symbols
-        private char[] VALID_SYMBOLS = { 'K', 'A', 'B', 'C', 'D' };
+        private char[] validSymbols = { 'K', 'A', 'B', 'C', 'D' };
 
         public Figure(ICell containingCell, char drawingRepresentation)
         {
@@ -47,7 +47,7 @@
 
             set
             {
-                if (VALID_SYMBOLS.Contains(value))
+                if (this.validSymbols.Contains(value))
                 {
                     this.drawingRepresentation = value;
                 }
@@ -79,6 +79,5 @@
             table.Cells[newCell.Row, newCell.Col].Value = newCell.Value;
             this.ContainingCell = newCell;
         }
-
     }
 }

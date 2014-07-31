@@ -6,14 +6,14 @@
     {
         private readonly string[] DirectionsAvailable = { "DL", "DR" };
 
-        public Pawn(ICell position, char drawingRepresentation) :
-            base(position, drawingRepresentation)
+        public Pawn(ICell position, char drawingRepresentation)
+            : base(position, drawingRepresentation)
         {
         }
 
         public override string[] AllowedMoves
         {
-            get { return this.DirectionsAvailable; }
+            get { return DirectionsAvailable; }
         }
     }
 }

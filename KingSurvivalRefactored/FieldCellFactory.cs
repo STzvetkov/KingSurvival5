@@ -71,13 +71,13 @@
 
         public FieldCell GenerateNextCell()
         {
-            ConsoleColor currentCellColor = currentCellIsOdd ? oddColor : evenColor;
-            FieldCell result = new FieldCell(currentCol, currentRow, representationChar, currentCellColor);
+            ConsoleColor currentCellColor = this.currentCellIsOdd ? this.oddColor : this.evenColor;
+            FieldCell result = new FieldCell(this.currentCol, this.currentRow, this.representationChar, currentCellColor);
             this.currentCol++;
             if (this.currentCol == this.ColCount)
             {
-                currentCol = 0;
-                currentRow++;
+                this.currentCol = 0;
+                this.currentRow++;
                 this.currentCellIsOdd = !this.currentCellIsOdd;
 
                 if (this.currentRow > this.RowCount)

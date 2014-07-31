@@ -14,7 +14,7 @@
         public void InitEnumerator()
         {
             FieldCellFactory testFactory = new FieldCellFactory(8, 8, '&', ConsoleColor.Blue, ConsoleColor.Red);
-            Table testTable = new Table(testFactory, new Frame("test.txt"));
+            Table testTable = new Table(testFactory, new Frame("../../test.txt"));
             tableEnumerator = new TableEnumerator(testTable);
         }
 
@@ -51,7 +51,7 @@
         public void TheIteratorShouldIterateOverTheTableProperly()
         {
             FieldCellFactory testFactory = new FieldCellFactory(8, 8, '&', ConsoleColor.Blue, ConsoleColor.Red);
-            Table testTable = new Table(testFactory, new Frame("test.txt"));
+            Table testTable = new Table(testFactory, new Frame("../../test.txt"));
             ICell result;
             int row = 0;
             int col = 0;

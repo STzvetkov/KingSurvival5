@@ -22,7 +22,7 @@ namespace KingSurvivalRefactored.Tests
                 CONSOLE_INITIAL_POSITION_X, CONSOLE_INITIAL_POSITION_Y, testwriter);
         }
         [TestMethod]
-        public void returnDistanceBetweenCellsHorizontallyCorrectly()
+        public void ReturnDistanceBetweenCellsHorizontallyCorrectly()
         {
             ConsoleRenderer testRenderer = CreateConsoleRenderer();
             Assert.AreEqual(testRenderer.DistanceBetweenCellsX, DISTANCE_BETWEEN_CELLS_X,
@@ -30,7 +30,7 @@ namespace KingSurvivalRefactored.Tests
                 testRenderer.DistanceBetweenCellsX + " was reported");
         }
         [TestMethod]
-        public void returnDistanceBetweenCellsVerticalyCorrectly()
+        public void ReturnDistanceBetweenCellsVerticalyCorrectly()
         {
             ConsoleRenderer testRenderer = CreateConsoleRenderer();
             Assert.AreEqual(testRenderer.DistanceBetweenCellsY, DISTANCE_BETWEEN_CELLS_Y,
@@ -38,7 +38,7 @@ namespace KingSurvivalRefactored.Tests
                 testRenderer.DistanceBetweenCellsY + " was reported");
         }
         [TestMethod]
-        public void returnConsoleVerticalInitialPositionCorrectly()
+        public void ReturnConsoleVerticalInitialPositionCorrectly()
         {
             ConsoleRenderer testRenderer = CreateConsoleRenderer();
             Assert.AreEqual(testRenderer.ConsoleInitialPositionY, CONSOLE_INITIAL_POSITION_Y,
@@ -46,7 +46,7 @@ namespace KingSurvivalRefactored.Tests
                 testRenderer.ConsoleInitialPositionY + " was reported");
         }
         [TestMethod]
-        public void returnConsoleHorizontalInitialPositionCorrectly()
+        public void ReturnConsoleHorizontalInitialPositionCorrectly()
         {
             ConsoleRenderer testRenderer = CreateConsoleRenderer();
             Assert.AreEqual(testRenderer.ConsoleInitialPositionX, CONSOLE_INITIAL_POSITION_X,
@@ -54,7 +54,7 @@ namespace KingSurvivalRefactored.Tests
                 testRenderer.ConsoleInitialPositionX + " was reported");
         }
         [TestMethod]
-        public void shouldCorrectlyDrawTable()
+        public void ShouldCorrectlyDrawTable()
         {
             string testImage="This is a test image";
             //mocking the table 

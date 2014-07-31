@@ -216,7 +216,7 @@
         private Table InitTable(int rowsCountInTable, int colsCountInTable)
         {
             return new Table(new FieldCellFactory(rowsCountInTable, colsCountInTable, ' ',
-                ConsoleColor.Red, ConsoleColor.DarkCyan), new Frame("test.txt"));
+                ConsoleColor.Red, ConsoleColor.DarkCyan), new Frame("../../test.txt"));
         }
 
         private King InitKing(int kingRow, int kingCol)

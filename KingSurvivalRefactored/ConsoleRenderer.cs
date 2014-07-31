@@ -18,7 +18,7 @@
         private int consoleInitialPositionY;
 
         public ConsoleRenderer(int distanceBetweenCellsX, int distanceBetweenCellsY,
-            int consoleInitialPositionX, int consoleInitialPositionY)
+               int consoleInitialPositionX, int consoleInitialPositionY)
         {
             this.OutputWriter = new ConsoleWriter();
             this.InitializeDistanceValues(distanceBetweenCellsX, distanceBetweenCellsY,
@@ -129,7 +129,7 @@
             this.outputWriter.WriteLine(tableToDraw.Frame.Image);
             foreach (ICell cell in tableToDraw)
             {
-                this.DrawCell(cell as ICell);
+                this.DrawCell(cell);
             }
         }
 

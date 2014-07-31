@@ -2,10 +2,7 @@
 {
     public interface IFigureFactory
     {
-        int PawnCount
-        {
-            set;
-        }
+        int PawnCount { set; }
 
         IFigure[] GenerateFigures();
     }

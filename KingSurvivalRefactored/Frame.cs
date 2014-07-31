@@ -18,7 +18,7 @@
         {
             this.Width = 0;
             this.Height = 0;
-            this.image = ReadImage(pathToFrameImage);
+            this.image = this.ReadImage(pathToFrameImage);
         }
 
         public string Image
